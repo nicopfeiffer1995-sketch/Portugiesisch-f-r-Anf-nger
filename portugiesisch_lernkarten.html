@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portugiesisch Vokabel-Master 250</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-light: #dbeafe;
+            --success: #16a34a;
+            --success-light: #dcfce7;
+            --danger: #dc2626;
+            --danger-light: #fee2e2;
+            --warning: #ca8a04;
+            --warning-light: #fef9c3;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-sec: #64748b;
+            --border: #e2e8f0;
+            --radius: 12px;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --font-sans: 'Segoe UI', Roboto, sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: var(--bg); color: var(--text-main); font-family: var(--font-sans); display: flex; justify-content: center; padding: 20px; }
+        .app { max-width: 700px; width: 100%; }
+
+        .title { text-align: center; color: var(--primary); margin-bottom: 20px; }
+        .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+        .stat-card { background: white; padding: 15px; border-radius: var(--radius); text-align: center; box-shadow: var(--shadow); border: 1px solid var(--border); }
+        .stat-num { font-size: 22px; font-weight: 700; color: var(--primary); }
+        .stat-lbl { font-size: 11px; color: var(--text-sec); text-transform: uppercase; }
+
+        .progress-box { background: white; padding: 15px; border-radius: var(--radius); margin-bottom: 20px; box-shadow: var(--shadow); border: 1px solid var(--border); }
+        .progress-bar { height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden; margin: 10px 0; }
+        .progress-fill { height: 100%; background: var(--success); transition: width 0.3s; }
+
+        .cat-filter { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 15px; justify-content: center; }
+        .cat-btn { padding: 5px 12px; border-radius: 15px; border: 1px solid var(--border); background: white; font-size: 12px; cursor: pointer; }
+        .cat-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+        .card-scene { perspective: 1000px; width: 100%; height: 250px; cursor: pointer; margin-bottom: 20px; }
+        .card-inner { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 0.6s; }
+        .card-inner.flipped { transform: rotateY(180deg); }
+        .card-face { position: absolute; inset: 0; backface-visibility: hidden; border-radius: var(--radius); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; box-shadow: var(--shadow); border: 1px solid var(--border); }
+        .card-front { background: white; }
+        .card-back { background: #f1f5f9; transform: rotateY(180deg); }
+        
+        .card-main { font-size: 28px; font-weight: 700; text-align: center; }
+        .card-sub { font-size: 16px; color: var(--success); margin-top: 10px; font-style: italic; }
+        .card-de { font-size: 24px; color: var(--primary); font-weight: 700; }
+        .card-badge { position: absolute; top: 15px; right: 15px; font-size: 10px; padding: 3px 10px; border-radius: 10px; background: var(--primary-light); color: var(--primary); font-weight: 700; }
+
+        .nav-row { display: flex; gap: 10px; align-items: center; }
+        .btn { padding: 12px 20px; border-radius: var(--radius); border: none; cursor: pointer; font-weight: 600; transition: 0.2s; }
+        .btn-nav { background: white; border: 1px solid var(--border); }
+        .btn-known { flex: 1; background: var(--success); color: white; }
+        .btn-known.is-known { background: var(--warning); }
+        
+        /* Neuer Share-Button Style */
+        .btn-share { 
+            width: 100%; margin-top: 15px; 
+            background: var(--primary-light); 
+            color: var(--primary); 
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="app">
+    <h2 class="title">🇧🇷 Portugiesisch Vokabel-Master</h2>
+
+    <div class="stats-row">
+        <div class="stat-card"><div class="stat-num" id="totalCount">250</div><div class="stat-lbl">Gesamt</div></div>
+        <div class="stat-card"><div class="stat-num" id="knownCount">0</div><div class="stat-lbl">Gelernt</div></div>
+        <div class="stat-card"><div class="stat-num" id="pctCount">0%</div><div class="stat-lbl">Fortschritt</div></div>
+    </div>
+
+    <div class="progress-box">
+        <div class="cat-filter" id="catFilter"></div>
+        <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width: 0%"></div></div>
+        <div style="display:flex; justify-content: space-between; font-size: 12px; color: var(--text-sec);">
+            <span id="progressLabel">0 / 250</span>
+            <span onclick="shuffleDeck()" style="cursor:pointer; color: var(--primary);">🔀 Mischen</span>
+        </div>
+    </div>
+
+    <div class="card-scene" onclick="flipCard()">
+        <div class="card-inner" id="cardInner">
+            <div class="card-face card-front">
+                <span class="card-badge" id="cardCat"></span>
+                <span style="font-size: 10px; text-transform: uppercase; color: var(--text-sec);">🇧🇷 Portugiesisch</span>
+                <div class="card-main" id="cardPt">...</div>
+                <div class="card-sub" id="cardPhon"></div>
+            </div>
+            <div class="card-face card-back">
+                <span style="font-size: 10px; text-transform: uppercase; color: var(--text-sec);">🇩🇪 Deutsch</span>
+                <div class="card-de" id="cardDe">...</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav-row">
+        <button class="btn btn-nav" onclick="navigate(-1)">←</button>
+        <button class="btn btn-known" id="btnKnown" onclick="toggleKnown()">Kenne ich!</button>
+        <button class="btn btn-nav" onclick="navigate(1)">→</button>
+    </div>
+
+    <button class="btn btn-share" onclick="shareProgress()">
+        📤 Fortschritt teilen
+    </button>
+</div>
+
+<script>
+// (Der DATA-Block bleibt identisch mit deinem letzten Code)
+const DATA = [
+    {pt:"Oi!", ph:"[oi]", de:"Hi!", cat:"Basics"},
+    {pt:"Olá!", ph:"[o-LAH]", de:"Hallo!", cat:"Basics"},
+    {pt:"Tudo bem?", ph:"[tu-du BENG]", de:"Wie geht's?", cat:"Basics"},
+    {pt:"Bom dia!", ph:"[bom DJI-a]", de:"Guten Morgen!", cat:"Basics"},
+    {pt:"Boa tarde!", ph:"[boa TAR-dji]", de:"Guten Tag!", cat:"Basics"},
+    {pt:"Boa noite!", ph:"[boa NOI-tji]", de:"Guten Abend!", cat:"Basics"},
+    {pt:"Obrigado", ph:"[o-bri-GA-du]", de:"Danke (m)", cat:"Basics"},
+    {pt:"Obrigada", ph:"[o-bri-GA-da]", de:"Danke (w)", cat:"Basics"},
+    {pt:"Por favor", ph:"[por fa-VOR]", de:"Bitte", cat:"Basics"},
+    {pt:"De nada", ph:"[dji NA-da]", de:"Gern geschehen", cat:"Basics"},
+    {pt:"Prazer", ph:"[pra-ZER]", de:"Freut mich", cat:"Basics"},
+    {pt:"Desculpe", ph:"[des-KUL-pi]", de:"Entschuldigung", cat:"Basics"},
+    {pt:"Sim", ph:"[sing]", de:"Ja", cat:"Basics"},
+    {pt:"Não", ph:"[naung]", de:"Nein", cat:"Basics"},
+    {pt:"Talvez", ph:"[tal-VES]", de:"Vielleicht", cat:"Basics"},
+    {pt:"Tchau", ph:"[tschau]", de:"Tschüss", cat:"Basics"},
+    {pt:"Até logo", ph:"[a-TE LO-gu]", de:"Bis bald", cat:"Basics"},
+    {pt:"Eu", ph:"[ew]", de:"Ich", cat:"Basics"},
+    {pt:"Você", ph:"[vo-SE]", de:"Du / Sie", cat:"Basics"},
+    {pt:"Ele / Ela", ph:"[E-li / E-la]", de:"Er / Sie", cat:"Basics"},
+    {pt:"Nós", ph:"[naws]", de:"Wir", cat:"Basics"},
+    {pt:"Eles", ph:"[E-lis]", de:"Sie (Plural)", cat:"Basics"},
+    {pt:"Amigo", ph:"[a-MI-gu]", de:"Freund", cat:"Basics"},
+    {pt:"Família", ph:"[fa-MI-lya]", de:"Familie", cat:"Basics"},
+    {pt:"Nome", ph:"[NO-mi]", de:"Name", cat:"Basics"},
+    {pt:"Um", ph:"[ung]", de:"Eins", cat:"Zeit & Zahlen"},
+    {pt:"Dois", ph:"[dois]", de:"Zwei", cat:"Zeit & Zahlen"},
+    {pt:"Três", ph:"[tres]", de:"Drei", cat:"Zeit & Zahlen"},
+    {pt:"Quatro", ph:"[KWA-tru]", de:"Vier", cat:"Zeit & Zahlen"},
+    {pt:"Cinco", ph:"[SING-ku]", de:"Fünf", cat:"Zeit & Zahlen"},
+    {pt:"Dez", ph:"[des]", de:"Zehn", cat:"Zeit & Zahlen"},
+    {pt:"Cem", ph:"[seng]", de:"Hundert", cat:"Zeit & Zahlen"},
+    {pt:"Heute", ph:"[O-ji]", de:"Hoje", cat:"Zeit & Zahlen"}, // Korrigiert: pt/de vertauscht im Prompt? Hier: pt: Hoje
+    {pt:"Hoje", ph:"[O-ji]", de:"Heute", cat:"Zeit & Zahlen"},
+    {pt:"Ontem", ph:"[ON-teng]", de:"Gestern", cat:"Zeit & Zahlen"},
+    {pt:"Amanhã", ph:"[a-man-YA]", de:"Morgen", cat:"Zeit & Zahlen"},
+    {pt:"Agora", ph:"[a-GO-ra]", de:"Jetzt", cat:"Zeit & Zahlen"},
+    {pt:"Depois", ph:"[de-POIS]", de:"Später", cat:"Zeit & Zahlen"},
+    {pt:"Cedo", ph:"[SE-du]", de:"Früh", cat:"Zeit & Zahlen"},
+    {pt:"Tarde", ph:"[TAR-dji]", de:"Spät", cat:"Zeit & Zahlen"},
+    {pt:"Hora", ph:"[O-ra]", de:"Stunde", cat:"Zeit & Zahlen"},
+    {pt:"Dia", ph:"[DJI-a]", de:"Tag", cat:"Zeit & Zahlen"},
+    {pt:"Semana", ph:"[se-MA-na]", de:"Woche", cat:"Zeit & Zahlen"},
+    {pt:"Mês", ph:"[mes]", de:"Monat", cat:"Zeit & Zahlen"},
+    {pt:"Ano", ph:"[A-nu]", de:"Jahr", cat:"Zeit & Zahlen"},
+    {pt:"Segunda-feira", ph:"[se-GUN-da FEI-ra]", de:"Montag", cat:"Zeit & Zahlen"},
+    {pt:"Sábado", ph:"[SA-ba-du]", de:"Samstag", cat:"Zeit & Zahlen"},
+    {pt:"Domingo", ph:"[do-MING-gu]", de:"Sonntag", cat:"Zeit & Zahlen"},
+    {pt:"Nunca", ph:"[NUNG-ka]", de:"Nie", cat:"Zeit & Zahlen"},
+    {pt:"Sempre", ph:"[SENG-pri]", de:"Immer", cat:"Zeit & Zahlen"},
+    {pt:"Às vezes", ph:"[as VE-zis]", de:"Manchmal", cat:"Zeit & Zahlen"},
+    {pt:"Água", ph:"[A-gwa]", de:"Wasser", cat:"Essen & Haus"},
+    {pt:"Café", ph:"[ka-FE]", de:"Kaffee", cat:"Essen & Haus"},
+    {pt:"Cerveja", ph:"[ser-VE-ja]", de:"Bier", cat:"Essen & Haus"},
+    {pt:"Pão", ph:"[paung]", de:"Brot", cat:"Essen & Haus"},
+    {pt:"Comida", ph:"[ko-MI-da]", de:"Essen / Mahlzeit", cat:"Essen & Haus"},
+    {pt:"Carne", ph:"[KAR-nji]", de:"Fleisch", cat:"Essen & Haus"},
+    {pt:"Frango", ph:"[FRANG-gu]", de:"Hähnchen", cat:"Essen & Haus"},
+    {pt:"Peixe", ph:"[PEI-shi]", de:"Fisch", cat:"Essen & Haus"},
+    {pt:"Arroz", ph:"[a-HOS]", de:"Reis", cat:"Essen & Haus"},
+    {pt:"Feijão", ph:"[fei-JAUNG]", de:"Bohnen", cat:"Essen & Haus"},
+    {pt:"Fruta", ph:"[FRU-ta]", de:"Obst", cat:"Essen & Haus"},
+    {pt:"Maçã", ph:"[ma-SANG]", de:"Apfel", cat:"Essen & Haus"},
+    {pt:"Leite", ph:"[LEI-tji]", de:"Milch", cat:"Essen & Haus"},
+    {pt:"Açúcar", ph:"[a-SU-kar]", de:"Zucker", cat:"Essen & Haus"},
+    {pt:"Sal", ph:"[sal]", de:"Salz", cat:"Essen & Haus"},
+    {pt:"Cozinha", ph:"[ko-ZING-ya]", de:"Küche", cat:"Essen & Haus"},
+    {pt:"Banheiro", ph:"[ban-YEI-ru]", de:"Badezimmer", cat:"Essen & Haus"},
+    {pt:"Quarto", ph:"[KWAR-tu]", de:"Zimmer / Schlafzimmer", cat:"Essen & Haus"},
+    {pt:"Cama", ph:"[KA-ma]", de:"Bett", cat:"Essen & Haus"},
+    {pt:"Mesa", ph:"[ME-za]", de:"Tisch", cat:"Essen & Haus"},
+    {pt:"Cadeira", ph:"[ka-DEI-ra]", de:"Stuhl", cat:"Essen & Haus"},
+    {pt:"Porta", ph:"[POR-ta]", de:"Tür", cat:"Essen & Haus"},
+    {pt:"Janela", ph:"[ja-NE-la]", de:"Fenster", cat:"Essen & Haus"},
+    {pt:"Casa", ph:"[KA-za]", de:"Haus", cat:"Essen & Haus"},
+    {pt:"Chave", ph:"[SHA-vi]", de:"Schlüssel", cat:"Essen & Haus"},
+    {pt:"Falar", ph:"[fa-LAR]", de:"Sprechen", cat:"Verben"},
+    {pt:"Comer", ph:"[ko-MER]", de:"Essen", cat:"Verben"},
+    {pt:"Beber", ph:"[be-BER]", de:"Trinken", cat:"Verben"},
+    {pt:"Ir", ph:"[ir]", de:"Gehen", cat:"Verben"},
+    {pt:"Vir", ph:"[vir]", de:"Kommen", cat:"Verben"},
+    {pt:"Ver", ph:"[ver]", de:"Sehen", cat:"Verben"},
+    {pt:"Ouvir", ph:"[ou-VIR]", de:"Hören", cat:"Verben"},
+    {pt:"Fazer", ph:"[fa-ZER]", de:"Machen / Tun", cat:"Verben"},
+    {pt:"Ter", ph:"[ter]", de:"Haben", cat:"Verben"},
+    {pt:"Ser", ph:"[ser]", de:"Sein (dauerhaft)", cat:"Verben"},
+    {pt:"Estar", ph:"[es-TAR]", de:"Sein (temporär)", cat:"Verben"},
+    {pt:"Gostar", ph:"[gos-TAR]", de:"Mögen", cat:"Verben"},
+    {pt:"Querer", ph:"[ke-RER]", de:"Wollen", cat:"Verben"},
+    {pt:"Poder", ph:"[po-DER]", de:"Können / Dürfen", cat:"Verben"},
+    {pt:"Saber", ph:"[sa-BER]", de:"Wissen", cat:"Verben"},
+    {pt:"Entender", ph:"[en-ten-DER]", de:"Verstehen", cat:"Verben"},
+    {pt:"Trabalhar", ph:"[tra-ba-LYAR]", de:"Arbeiten", cat:"Verben"},
+    {pt:"Dormir", ph:"[dor-MIR]", de:"Schlafen", cat:"Verben"},
+    {pt:"Ler", ph:"[ler]", de:"Lesen", cat:"Verben"},
+    {pt:"Escrever", ph:"[es-kre-VER]", de:"Schreiben", cat:"Verben"},
+    {pt:"Comprar", ph:"[kom-PRAR]", de:"Kaufen", cat:"Verben"},
+    {pt:"Vender", ph:"[ven-DER]", de:"Verkaufen", cat:"Verben"},
+    {pt:"Chamar", ph:"[sha-MAR]", de:"Rufen / Nennen", cat:"Verben"},
+    {pt:"Ajudar", ph:"[a-ju-DAR]", de:"Helfen", cat:"Verben"},
+    {pt:"Pensar", ph:"[pen-SAR]", de:"Denken", cat:"Verben"},
+    {pt:"Rua", ph:"[HU-a]", de:"Straße", cat:"Orte & Reise"},
+    {pt:"Cidade", ph:"[si-DA-dji]", de:"Stadt", cat:"Orte & Reise"},
+    {pt:"Praia", ph:"[PRAI-ya]", de:"Strand", cat:"Orte & Reise"},
+    {pt:"Carro", ph:"[KA-hu]", de:"Auto", cat:"Orte & Reise"},
+    {pt:"Avião", ph:"[a-vi-AUNG]", de:"Flugzeug", cat:"Orte & Reise"},
+    {pt:"Ônibus", ph:"[O-ni-bus]", de:"Bus", cat:"Orte & Reise"},
+    {pt:"Bilhete", ph:"[bi-LYE-tji]", de:"Ticket", cat:"Orte & Reise"},
+    {pt:"Hotel", ph:"[o-TEL]", de:"Hotel", cat:"Orte & Reise"},
+    {pt:"Onde?", ph:"[ON-dji]", de:"Wo?", cat:"Orte & Reise"},
+    {pt:"Aqui", ph:"[a-KI]", de:"Hier", cat:"Orte & Reise"},
+    {pt:"Lá", ph:"[la]", de:"Dort", cat:"Orte & Reise"},
+    {pt:"Esquerda", ph:"[es-KER-da]", de:"Links", cat:"Orte & Reise"},
+    {pt:"Direita", ph:"[di-REI-ta]", de:"Rechts", cat:"Orte & Reise"},
+    {pt:"Perto", ph:"[PER-tu]", de:"Nah", cat:"Orte & Reise"},
+    {pt:"Longe", ph:"[LONG-ji]", de:"Weit weg", cat:"Orte & Reise"},
+    {pt:"Grande", ph:"[GRAN-dji]", de:"Groß", cat:"Adjektive"},
+    {pt:"Pequeno", ph:"[pe-KE-nu]", de:"Klein", cat:"Adjektive"},
+    {pt:"Bom", ph:"[bom]", de:"Gut", cat:"Adjektive"},
+    {pt:"Mau", ph:"[maw]", de:"Schlecht", cat:"Adjektive"},
+    {pt:"Bonito", ph:"[bo-NI-tu]", de:"Schön", cat:"Adjektive"},
+    {pt:"Feio", ph:"[FEI-yu]", de:"Hässlich", cat:"Adjektive"},
+    {pt:"Novo", ph:"[NO-vu]", de:"Neu / Jung", cat:"Adjektive"},
+    {pt:"Velho", ph:"[VE-lyu]", de:"Alt", cat:"Adjektive"},
+    {pt:"Caro", ph:"[KA-ru]", de:"Teuer", cat:"Adjektive"},
+    {pt:"Barato", ph:"[ba-RA-tu]", de:"Billig", cat:"Adjektive"},
+    {pt:"Corpo", ph:"[KOR-pu]", de:"Körper", cat:"Körper & Seele"},
+    {pt:"Mão", ph:"[maung]", de:"Hand", cat:"Körper & Seele"},
+    {pt:"Pé", ph:"[pe]", de:"Fuß", cat:"Körper & Seele"},
+    {pt:"Cabeça", ph:"[ka-BE-sa]", de:"Kopf", cat:"Körper & Seele"},
+    {pt:"Olhos", ph:"[O-lyus]", de:"Augen", cat:"Körper & Seele"},
+    {pt:"Coração", ph:"[ko-ra-SAUNG]", de:"Herz", cat:"Körper & Seele"},
+    {pt:"Amor", ph:"[a-MOR]", de:"Liebe", cat:"Körper & Seele"},
+    {pt:"Feliz", ph:"[fe-LIS]", de:"Glücklich", cat:"Körper & Seele"},
+    {pt:"Triste", ph:"[TRIS-tji]", de:"Traurig", cat:"Körper & Seele"},
+    {pt:"Cansado", ph:"[kan-SA-du]", de:"Müde", cat:"Körper & Seele"},
+    {pt:"Fome", ph:"[FO-mi]", de:"Hunger", cat:"Körper & Seele"},
+    {pt:"Sede", ph:"[SE-dji]", de:"Durst", cat:"Körper & Seele"},
+    {pt:"Sol", ph:"[sol]", de:"Sonne", cat:"Wetter"},
+    {pt:"Chuva", ph:"[SHU-va]", de:"Regen", cat:"Wetter"},
+    {pt:"Frio", ph:"[FRI-yu]", de:"Kalt", cat:"Wetter"},
+    {pt:"Calor", ph:"[ka-LOR]", de:"Warm / Hitze", cat:"Wetter"},
+    {pt:"Vento", ph:"[VEN-tu]", de:"Wind", cat:"Wetter"},
+    {pt:"Tempo", ph:"[TEM-pu]", de:"Zeit / Wetter", cat:"Wetter"},
+    {pt:"Céu", ph:"[sew]", de:"Himmel", cat:"Wetter"},
+    {pt:"Luz", ph:"[lus]", de:"Licht", cat:"Basics"},
+    {pt:"Mundo", ph:"[MUN-du]", de:"Welt", cat:"Basics"},
+    {pt:"Pessoa", ph:"[pe-SO-a]", de:"Person", cat:"Basics"},
+    {pt:"Lugar", ph:"[lu-GAR]", de:"Ort", cat:"Basics"},
+    {pt:"Coisa", ph:"[KOI-za]", de:"Ding / Sache", cat:"Basics"},
+    {pt:"Saúde", ph:"[sa-U-dji]", de:"Gesundheit", cat:"Basics"}
+];
+
+let currentDeck = [...DATA];
+let idx = 0;
+let flipped = false;
+let knownIds = new Set(JSON.parse(localStorage.getItem('ptKnown') || '[]'));
+
+function initFilter() {
+    const cats = ["Alle", ...new Set(DATA.map(d => d.cat))];
+    const container = document.getElementById('catFilter');
+    cats.forEach(c => {
+        const btn = document.createElement('button');
+        btn.className = 'cat-btn' + (c === 'Alle' ? ' active' : '');
+        btn.innerText = c;
+        btn.onclick = () => filterCat(c, btn);
+        container.appendChild(btn);
+    });
+}
+
+function filterCat(cat, btn) {
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentDeck = cat === "Alle" ? [...DATA] : DATA.filter(d => d.cat === cat);
+    idx = 0;
+    render();
+}
+
+function flipCard() {
+    flipped = !flipped;
+    document.getElementById('cardInner').classList.toggle('flipped', flipped);
+}
+
+function navigate(step) {
+    idx = (idx + step + currentDeck.length) % currentDeck.length;
+    flipped = false;
+    document.getElementById('cardInner').classList.remove('flipped');
+    render();
+}
+
+function toggleKnown() {
+    const word = currentDeck[idx].pt;
+    if(knownIds.has(word)) knownIds.delete(word);
+    else knownIds.add(word);
+    localStorage.setItem('ptKnown', JSON.stringify([...knownIds]));
+    render();
+}
+
+function shuffleDeck() {
+    currentDeck.sort(() => Math.random() - 0.5);
+    idx = 0;
+    render();
+}
+
+function render() {
+    const item = currentDeck[idx];
+    document.getElementById('cardPt').innerText = item.pt;
+    document.getElementById('cardPhon').innerText = item.ph;
+    document.getElementById('cardDe').innerText = item.de;
+    document.getElementById('cardCat').innerText = item.cat;
+
+    const isKnown = knownIds.has(item.pt);
+    const btn = document.getElementById('btnKnown');
+    btn.innerText = isKnown ? "Gelernt ✓" : "Kenne ich!";
+    btn.className = 'btn btn-known' + (isKnown ? ' is-known' : '');
+
+    const total = DATA.length;
+    const known = knownIds.size;
+    const pct = Math.round((known/total)*100);
+    document.getElementById('totalCount').innerText = total;
+    document.getElementById('knownCount').innerText = known;
+    document.getElementById('pctCount').innerText = pct + "%";
+    document.getElementById('progressFill').style.width = pct + "%";
+    document.getElementById('progressLabel').innerText = `${idx + 1} / ${currentDeck.length}`;
+}
+
+// NEUE TEILEN-FUNKTION
+function shareProgress() {
+    const total = DATA.length;
+    const known = knownIds.size;
+    const pct = Math.round((known/total)*100);
+    const text = `🇧🇷 Mein Portugiesisch-Fortschritt:\n✅ ${known} von ${total} Vokabeln gelernt (${pct}%)\n🚀 Trainiert mit dem Vokabel-Master!`;
+    
+    if (navigator.share) {
+        navigator.share({ title: 'Portugiesisch Fortschritt', text: text });
+    } else {
+        navigator.clipboard.writeText(text);
+        alert("Fortschritt als Text kopiert!");
+    }
+}
+
+initFilter();
+render();
+</script>
+</body>
+</html>

@@ -3,32 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portugiesisch Vokabel-Master 250</title>
+    <title>Portugiesisch Vokabel-Master 175</title>
     <style>
         :root {
             --primary: #2563eb;
             --primary-light: #dbeafe;
             --success: #16a34a;
             --success-light: #dcfce7;
-            --danger: #dc2626;
-            --danger-light: #fee2e2;
             --warning: #ca8a04;
-            --warning-light: #fef9c3;
             --bg: #f8fafc;
-            --card-bg: #ffffff;
             --text-main: #1e293b;
             --text-sec: #64748b;
             --border: #e2e8f0;
             --radius: 12px;
             --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-            --font-sans: 'Segoe UI', Roboto, sans-serif;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: var(--bg); color: var(--text-main); font-family: var(--font-sans); display: flex; justify-content: center; padding: 20px; }
+        body { background: var(--bg); color: var(--text-main); font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; padding: 20px; }
         .app { max-width: 700px; width: 100%; }
-
         .title { text-align: center; color: var(--primary); margin-bottom: 20px; }
+        
         .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
         .stat-card { background: white; padding: 15px; border-radius: var(--radius); text-align: center; box-shadow: var(--shadow); border: 1px solid var(--border); }
         .stat-num { font-size: 22px; font-weight: 700; color: var(--primary); }
@@ -59,14 +54,7 @@
         .btn-nav { background: white; border: 1px solid var(--border); }
         .btn-known { flex: 1; background: var(--success); color: white; }
         .btn-known.is-known { background: var(--warning); }
-        
-        /* Neuer Share-Button Style */
-        .btn-share { 
-            width: 100%; margin-top: 15px; 
-            background: var(--primary-light); 
-            color: var(--primary); 
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-        }
+        .btn-share { width: 100%; margin-top: 15px; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; gap: 8px; }
     </style>
 </head>
 <body>
@@ -75,7 +63,7 @@
     <h2 class="title">🇧🇷 Portugiesisch Vokabel-Master</h2>
 
     <div class="stats-row">
-        <div class="stat-card"><div class="stat-num" id="totalCount">250</div><div class="stat-lbl">Gesamt</div></div>
+        <div class="stat-card"><div class="stat-num" id="totalCount">0</div><div class="stat-lbl">Gesamt</div></div>
         <div class="stat-card"><div class="stat-num" id="knownCount">0</div><div class="stat-lbl">Gelernt</div></div>
         <div class="stat-card"><div class="stat-num" id="pctCount">0%</div><div class="stat-lbl">Fortschritt</div></div>
     </div>
@@ -84,7 +72,7 @@
         <div class="cat-filter" id="catFilter"></div>
         <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width: 0%"></div></div>
         <div style="display:flex; justify-content: space-between; font-size: 12px; color: var(--text-sec);">
-            <span id="progressLabel">0 / 250</span>
+            <span id="progressLabel">0 / 0</span>
             <span onclick="shuffleDeck()" style="cursor:pointer; color: var(--primary);">🔀 Mischen</span>
         </div>
     </div>
@@ -110,14 +98,12 @@
         <button class="btn btn-nav" onclick="navigate(1)">→</button>
     </div>
 
-    <button class="btn btn-share" onclick="shareProgress()">
-        📤 Fortschritt teilen
-    </button>
+    <button class="btn btn-share" onclick="shareProgress()">📤 Fortschritt teilen</button>
 </div>
 
 <script>
-// (Der DATA-Block bleibt identisch mit deinem letzten Code)
 const DATA = [
+    // --- BASICS & PERSONEN ---
     {pt:"Oi!", ph:"[oi]", de:"Hi!", cat:"Basics"},
     {pt:"Olá!", ph:"[o-LAH]", de:"Hallo!", cat:"Basics"},
     {pt:"Tudo bem?", ph:"[tu-du BENG]", de:"Wie geht's?", cat:"Basics"},
@@ -130,145 +116,184 @@ const DATA = [
     {pt:"De nada", ph:"[dji NA-da]", de:"Gern geschehen", cat:"Basics"},
     {pt:"Prazer", ph:"[pra-ZER]", de:"Freut mich", cat:"Basics"},
     {pt:"Desculpe", ph:"[des-KUL-pi]", de:"Entschuldigung", cat:"Basics"},
+    {pt:"Tchau", ph:"[tschau]", de:"Tschüss", cat:"Basics"},
+    {pt:"Até logo", ph:"[a-TE LO-gu]", de:"Bis bald", cat:"Basics"},
     {pt:"Sim", ph:"[sing]", de:"Ja", cat:"Basics"},
     {pt:"Não", ph:"[naung]", de:"Nein", cat:"Basics"},
     {pt:"Talvez", ph:"[tal-VES]", de:"Vielleicht", cat:"Basics"},
-    {pt:"Tchau", ph:"[tschau]", de:"Tschüss", cat:"Basics"},
-    {pt:"Até logo", ph:"[a-TE LO-gu]", de:"Bis bald", cat:"Basics"},
     {pt:"Eu", ph:"[ew]", de:"Ich", cat:"Basics"},
     {pt:"Você", ph:"[vo-SE]", de:"Du / Sie", cat:"Basics"},
     {pt:"Ele / Ela", ph:"[E-li / E-la]", de:"Er / Sie", cat:"Basics"},
-    {pt:"Nós", ph:"[naws]", de:"Wir", cat:"Basics"},
-    {pt:"Eles", ph:"[E-lis]", de:"Sie (Plural)", cat:"Basics"},
-    {pt:"Amigo", ph:"[a-MI-gu]", de:"Freund", cat:"Basics"},
+    {pt:"Nós", ph:"[naws]", de:"Wir (formal)", cat:"Basics"},
+    {pt:"A gente", ph:"[a JEN-tji]", de:"Wir (informal)", cat:"Basics"},
+    {pt:"Eles / Elas", ph:"[E-lis]", de:"Sie (Plural)", cat:"Basics"},
+    {pt:"Amigo / Amiga", ph:"[a-MI-gu]", de:"Freund / Freundin", cat:"Basics"},
     {pt:"Família", ph:"[fa-MI-lya]", de:"Familie", cat:"Basics"},
+    {pt:"Pessoa", ph:"[pe-SO-a]", de:"Person", cat:"Basics"},
     {pt:"Nome", ph:"[NO-mi]", de:"Name", cat:"Basics"},
-    {pt:"Um", ph:"[ung]", de:"Eins", cat:"Zeit & Zahlen"},
-    {pt:"Dois", ph:"[dois]", de:"Zwei", cat:"Zeit & Zahlen"},
-    {pt:"Três", ph:"[tres]", de:"Drei", cat:"Zeit & Zahlen"},
-    {pt:"Quatro", ph:"[KWA-tru]", de:"Vier", cat:"Zeit & Zahlen"},
-    {pt:"Cinco", ph:"[SING-ku]", de:"Fünf", cat:"Zeit & Zahlen"},
-    {pt:"Dez", ph:"[des]", de:"Zehn", cat:"Zeit & Zahlen"},
-    {pt:"Cem", ph:"[seng]", de:"Hundert", cat:"Zeit & Zahlen"},
-    {pt:"Heute", ph:"[O-ji]", de:"Hoje", cat:"Zeit & Zahlen"}, // Korrigiert: pt/de vertauscht im Prompt? Hier: pt: Hoje
-    {pt:"Hoje", ph:"[O-ji]", de:"Heute", cat:"Zeit & Zahlen"},
-    {pt:"Ontem", ph:"[ON-teng]", de:"Gestern", cat:"Zeit & Zahlen"},
-    {pt:"Amanhã", ph:"[a-man-YA]", de:"Morgen", cat:"Zeit & Zahlen"},
-    {pt:"Agora", ph:"[a-GO-ra]", de:"Jetzt", cat:"Zeit & Zahlen"},
-    {pt:"Depois", ph:"[de-POIS]", de:"Später", cat:"Zeit & Zahlen"},
-    {pt:"Cedo", ph:"[SE-du]", de:"Früh", cat:"Zeit & Zahlen"},
-    {pt:"Tarde", ph:"[TAR-dji]", de:"Spät", cat:"Zeit & Zahlen"},
-    {pt:"Hora", ph:"[O-ra]", de:"Stunde", cat:"Zeit & Zahlen"},
-    {pt:"Dia", ph:"[DJI-a]", de:"Tag", cat:"Zeit & Zahlen"},
-    {pt:"Semana", ph:"[se-MA-na]", de:"Woche", cat:"Zeit & Zahlen"},
-    {pt:"Mês", ph:"[mes]", de:"Monat", cat:"Zeit & Zahlen"},
-    {pt:"Ano", ph:"[A-nu]", de:"Jahr", cat:"Zeit & Zahlen"},
-    {pt:"Segunda-feira", ph:"[se-GUN-da FEI-ra]", de:"Montag", cat:"Zeit & Zahlen"},
-    {pt:"Sábado", ph:"[SA-ba-du]", de:"Samstag", cat:"Zeit & Zahlen"},
-    {pt:"Domingo", ph:"[do-MING-gu]", de:"Sonntag", cat:"Zeit & Zahlen"},
-    {pt:"Nunca", ph:"[NUNG-ka]", de:"Nie", cat:"Zeit & Zahlen"},
-    {pt:"Sempre", ph:"[SENG-pri]", de:"Immer", cat:"Zeit & Zahlen"},
-    {pt:"Às vezes", ph:"[as VE-zis]", de:"Manchmal", cat:"Zeit & Zahlen"},
-    {pt:"Água", ph:"[A-gwa]", de:"Wasser", cat:"Essen & Haus"},
-    {pt:"Café", ph:"[ka-FE]", de:"Kaffee", cat:"Essen & Haus"},
-    {pt:"Cerveja", ph:"[ser-VE-ja]", de:"Bier", cat:"Essen & Haus"},
-    {pt:"Pão", ph:"[paung]", de:"Brot", cat:"Essen & Haus"},
-    {pt:"Comida", ph:"[ko-MI-da]", de:"Essen / Mahlzeit", cat:"Essen & Haus"},
-    {pt:"Carne", ph:"[KAR-nji]", de:"Fleisch", cat:"Essen & Haus"},
-    {pt:"Frango", ph:"[FRANG-gu]", de:"Hähnchen", cat:"Essen & Haus"},
-    {pt:"Peixe", ph:"[PEI-shi]", de:"Fisch", cat:"Essen & Haus"},
-    {pt:"Arroz", ph:"[a-HOS]", de:"Reis", cat:"Essen & Haus"},
-    {pt:"Feijão", ph:"[fei-JAUNG]", de:"Bohnen", cat:"Essen & Haus"},
-    {pt:"Fruta", ph:"[FRU-ta]", de:"Obst", cat:"Essen & Haus"},
-    {pt:"Maçã", ph:"[ma-SANG]", de:"Apfel", cat:"Essen & Haus"},
-    {pt:"Leite", ph:"[LEI-tji]", de:"Milch", cat:"Essen & Haus"},
-    {pt:"Açúcar", ph:"[a-SU-kar]", de:"Zucker", cat:"Essen & Haus"},
-    {pt:"Sal", ph:"[sal]", de:"Salz", cat:"Essen & Haus"},
-    {pt:"Cozinha", ph:"[ko-ZING-ya]", de:"Küche", cat:"Essen & Haus"},
-    {pt:"Banheiro", ph:"[ban-YEI-ru]", de:"Badezimmer", cat:"Essen & Haus"},
-    {pt:"Quarto", ph:"[KWAR-tu]", de:"Zimmer / Schlafzimmer", cat:"Essen & Haus"},
-    {pt:"Cama", ph:"[KA-ma]", de:"Bett", cat:"Essen & Haus"},
-    {pt:"Mesa", ph:"[ME-za]", de:"Tisch", cat:"Essen & Haus"},
-    {pt:"Cadeira", ph:"[ka-DEI-ra]", de:"Stuhl", cat:"Essen & Haus"},
-    {pt:"Porta", ph:"[POR-ta]", de:"Tür", cat:"Essen & Haus"},
-    {pt:"Janela", ph:"[ja-NE-la]", de:"Fenster", cat:"Essen & Haus"},
-    {pt:"Casa", ph:"[KA-za]", de:"Haus", cat:"Essen & Haus"},
-    {pt:"Chave", ph:"[SHA-vi]", de:"Schlüssel", cat:"Essen & Haus"},
-    {pt:"Falar", ph:"[fa-LAR]", de:"Sprechen", cat:"Verben"},
-    {pt:"Comer", ph:"[ko-MER]", de:"Essen", cat:"Verben"},
-    {pt:"Beber", ph:"[be-BER]", de:"Trinken", cat:"Verben"},
-    {pt:"Ir", ph:"[ir]", de:"Gehen", cat:"Verben"},
-    {pt:"Vir", ph:"[vir]", de:"Kommen", cat:"Verben"},
-    {pt:"Ver", ph:"[ver]", de:"Sehen", cat:"Verben"},
-    {pt:"Ouvir", ph:"[ou-VIR]", de:"Hören", cat:"Verben"},
-    {pt:"Fazer", ph:"[fa-ZER]", de:"Machen / Tun", cat:"Verben"},
-    {pt:"Ter", ph:"[ter]", de:"Haben", cat:"Verben"},
+    {pt:"Homem", ph:"[O-meng]", de:"Mann", cat:"Basics"},
+    {pt:"Mulher", ph:"[mu-LYER]", de:"Frau", cat:"Basics"},
+    {pt:"Senhor", ph:"[se-NYOR]", de:"Herr / Sir", cat:"Basics"},
+    {pt:"Senhora", ph:"[se-NYO-ra]", de:"Frau / Ma'am", cat:"Basics"},
+    {pt:"Filho / Filha", ph:"[FI-lyu]", de:"Sohn / Tochter", cat:"Basics"},
+    {pt:"Moço / Moça", ph:"[MO-su]", de:"junger Mann / Frau", cat:"Basics"},
+    {pt:"Menino / Menina", ph:"[me-NI-nu]", de:"Junge / Mädchen", cat:"Basics"},
+    {pt:"Mundo", ph:"[MUN-du]", de:"Welt", cat:"Basics"},
+    {pt:"Lugar", ph:"[lu-GAR]", de:"Ort", cat:"Basics"},
+    {pt:"Coisa", ph:"[KOI-za]", de:"Ding / Sache", cat:"Basics"},
+    {pt:"Saúde", ph:"[sa-U-dji]", de:"Gesundheit", cat:"Basics"},
+    {pt:"Luz", ph:"[lus]", de:"Licht", cat:"Basics"},
+
+    // --- PDF KERNVOKABELN & FUNKTIONSWÖRTER ---
+    {pt:"Vez", ph:"[ves]", de:"Mal / Zeitpunkt", cat:"Kernvokabeln"},
+    {pt:"Palavra", ph:"[pa-LA-vra]", de:"Wort", cat:"Kernvokabeln"},
+    {pt:"Vida", ph:"[VI-da]", de:"Leben", cat:"Kernvokabeln"},
+    {pt:"Mão", ph:"[maung]", de:"Hand", cat:"Kernvokabeln"},
+    {pt:"Muito", ph:"[MUI-tu]", de:"Sehr / Viel", cat:"Kernvokabeln"},
+    {pt:"Pouco", ph:"[PO-ku]", de:"Wenig", cat:"Kernvokabeln"},
+    {pt:"Também", ph:"[tam-BENG]", de:"Auch", cat:"Kernvokabeln"},
+    {pt:"Apenas", ph:"[a-PE-nas]", de:"Nur / Bloß", cat:"Kernvokabeln"},
+    {pt:"Mais", ph:"[mais]", de:"Mehr", cat:"Kernvokabeln"},
+    {pt:"Menos", ph:"[ME-nus]", de:"Weniger", cat:"Kernvokabeln"},
+    {pt:"Mas", ph:"[mas]", de:"Aber", cat:"Kernvokabeln"},
+    {pt:"Ou", ph:"[ow]", de:"Oder", cat:"Kernvokabeln"},
+    {pt:"E", ph:"[i]", de:"Und", cat:"Kernvokabeln"},
+    {pt:"Para", ph:"[PA-ra]", de:"Für / Zu", cat:"Kernvokabeln"},
+    {pt:"Com", ph:"[kong]", de:"Mit", cat:"Kernvokabeln"},
+    {pt:"Por", ph:"[por]", de:"Durch / Pro / Von", cat:"Kernvokabeln"},
+    {pt:"De / Do / Da", ph:"[dji]", de:"Von / Aus", cat:"Kernvokabeln"},
+    {pt:"Em / No / Na", ph:"[eng]", de:"In / Auf / An", cat:"Kernvokabeln"},
+    {pt:"Este / Esta", ph:"[ES-tji]", de:"Dieses / Diese", cat:"Kernvokabeln"},
+    {pt:"Meu / Minha", ph:"[mew]", de:"Mein / Meine", cat:"Kernvokabeln"},
+    {pt:"Seu / Sua", ph:"[sew]", de:"Dein / Ihr", cat:"Kernvokabeln"},
+    {pt:"Que", ph:"[ki]", de:"Was / Dass / Das", cat:"Kernvokabeln"},
+    {pt:"Quem", ph:"[keng]", de:"Wer", cat:"Kernvokabeln"},
+    {pt:"Qual", ph:"[kwal]", de:"Welcher / Was", cat:"Kernvokabeln"},
+
+    // --- VERBEN ---
     {pt:"Ser", ph:"[ser]", de:"Sein (dauerhaft)", cat:"Verben"},
     {pt:"Estar", ph:"[es-TAR]", de:"Sein (temporär)", cat:"Verben"},
-    {pt:"Gostar", ph:"[gos-TAR]", de:"Mögen", cat:"Verben"},
-    {pt:"Querer", ph:"[ke-RER]", de:"Wollen", cat:"Verben"},
+    {pt:"Ter", ph:"[ter]", de:"Haben", cat:"Verben"},
+    {pt:"Fazer", ph:"[fa-ZER]", de:"Machen / Tun", cat:"Verben"},
+    {pt:"Ir", ph:"[ir]", de:"Gehen", cat:"Verben"},
+    {pt:"Vir", ph:"[vir]", de:"Kommen", cat:"Verben"},
+    {pt:"Dizer", ph:"[dji-ZER]", de:"Sagen / Erzählen", cat:"Verben"},
     {pt:"Poder", ph:"[po-DER]", de:"Können / Dürfen", cat:"Verben"},
+    {pt:"Ver", ph:"[ver]", de:"Sehen", cat:"Verben"},
+    {pt:"Dar", ph:"[dar]", de:"Geben", cat:"Verben"},
+    {pt:"Querer", ph:"[ke-RER]", de:"Wollen", cat:"Verben"},
+    {pt:"Falar", ph:"[fa-LAR]", de:"Sprechen", cat:"Verben"},
+    {pt:"Ficar", ph:"[fi-KAR]", de:"Bleiben / Sich befinden", cat:"Verben"},
+    {pt:"Achar", ph:"[a-SHAR]", de:"Glauben / Finden", cat:"Verben"},
     {pt:"Saber", ph:"[sa-BER]", de:"Wissen", cat:"Verben"},
-    {pt:"Entender", ph:"[en-ten-DER]", de:"Verstehen", cat:"Verben"},
+    {pt:"Chegar", ph:"[she-GAR]", de:"Ankommen", cat:"Verben"},
+    {pt:"Sair", ph:"[sa-IR]", de:"Hinausgehen / Ausgehen", cat:"Verben"},
+    {pt:"Passar", ph:"[pa-SAR]", de:"Verbringen / Vorbeigehen", cat:"Verben"},
+    {pt:"Pedir", ph:"[pe-DJIR]", de:"Bitten / Bestellen", cat:"Verben"},
+    {pt:"Parecer", ph:"[pa-re-SER]", de:"Scheinen / Aussehen wie", cat:"Verben"},
+    {pt:"Gostar", ph:"[gos-TAR]", de:"Mögen", cat:"Verben"},
     {pt:"Trabalhar", ph:"[tra-ba-LYAR]", de:"Arbeiten", cat:"Verben"},
     {pt:"Dormir", ph:"[dor-MIR]", de:"Schlafen", cat:"Verben"},
+    {pt:"Comer", ph:"[ko-MER]", de:"Essen", cat:"Verben"},
+    {pt:"Beber", ph:"[be-BER]", de:"Trinken", cat:"Verben"},
+    {pt:"Ouvir", ph:"[ou-VIR]", de:"Hören / Zuhören", cat:"Verben"},
+    {pt:"Entender", ph:"[en-ten-DER]", de:"Verstehen", cat:"Verben"},
     {pt:"Ler", ph:"[ler]", de:"Lesen", cat:"Verben"},
     {pt:"Escrever", ph:"[es-kre-VER]", de:"Schreiben", cat:"Verben"},
     {pt:"Comprar", ph:"[kom-PRAR]", de:"Kaufen", cat:"Verben"},
     {pt:"Vender", ph:"[ven-DER]", de:"Verkaufen", cat:"Verben"},
-    {pt:"Chamar", ph:"[sha-MAR]", de:"Rufen / Nennen", cat:"Verben"},
+    {pt:"Chamar", ph:"[sha-MAR]", de:"Rufen", cat:"Verben"},
     {pt:"Ajudar", ph:"[a-ju-DAR]", de:"Helfen", cat:"Verben"},
     {pt:"Pensar", ph:"[pen-SAR]", de:"Denken", cat:"Verben"},
+
+    // --- ZEIT & ZAHLEN ---
+    {pt:"Hoje", ph:"[O-ji]", de:"Heute", cat:"Zeit & Zahlen"},
+    {pt:"Ontem", ph:"[ON-teng]", de:"Gestern", cat:"Zeit & Zahlen"},
+    {pt:"Amanhã", ph:"[a-man-YA]", de:"Morgen", cat:"Zeit & Zahlen"},
+    {pt:"Agora", ph:"[a-GO-ra]", de:"Jetzt", cat:"Zeit & Zahlen"},
+    {pt:"Depois", ph:"[de-POIS]", de:"Nachher / Später", cat:"Zeit & Zahlen"},
+    {pt:"Antes", ph:"[AN-tjis]", de:"Vorher / Bevor", cat:"Zeit & Zahlen"},
+    {pt:"Cedo", ph:"[SE-du]", de:"Früh", cat:"Zeit & Zahlen"},
+    {pt:"Tarde", ph:"[TAR-dji]", de:"Spät / Nachmittag", cat:"Zeit & Zahlen"},
+    {pt:"Dia", ph:"[DJI-a]", de:"Tag", cat:"Zeit & Zahlen"},
+    {pt:"Noite", ph:"[NOI-tji]", de:"Nacht", cat:"Zeit & Zahlen"},
+    {pt:"Hora", ph:"[O-ra]", de:"Stunde", cat:"Zeit & Zahlen"},
+    {pt:"Semana", ph:"[se-MA-na]", de:"Woche", cat:"Zeit & Zahlen"},
+    {pt:"Mês", ph:"[mes]", de:"Monat", cat:"Zeit & Zahlen"},
+    {pt:"Ano", ph:"[A-nu]", de:"Jahr", cat:"Zeit & Zahlen"},
+    {pt:"Sempre", ph:"[SENG-pri]", de:"Immer", cat:"Zeit & Zahlen"},
+    {pt:"Nunca", ph:"[NUNG-ka]", de:"Nie", cat:"Zeit & Zahlen"},
+    {pt:"Às vezes", ph:"[as VE-zis]", de:"Manchmal", cat:"Zeit & Zahlen"},
+    {pt:"Segunda-feira", ph:"[se-GUN-da]", de:"Montag", cat:"Zeit & Zahlen"},
+    {pt:"Sábado / Domingo", ph:"[SA-ba-du]", de:"Sa. / So.", cat:"Zeit & Zahlen"},
+    {pt:"Um / Dois / Três", ph:"[ung...]", de:"1 / 2 / 3", cat:"Zeit & Zahlen"},
+    {pt:"Quatro / Cinco", ph:"[KWA-tru]", de:"4 / 5", cat:"Zeit & Zahlen"},
+    {pt:"Dez / Cem", ph:"[des / seng]", de:"10 / 100", cat:"Zeit & Zahlen"},
+
+    // --- ADJEKTIVE ---
+    {pt:"Bom / Boa", ph:"[bom]", de:"Gut", cat:"Adjektive"},
+    {pt:"Ruim", ph:"[hu-ING]", de:"Schlecht", cat:"Adjektive"},
+    {pt:"Grande", ph:"[GRAN-dji]", de:"Groß", cat:"Adjektive"},
+    {pt:"Pequeno/a", ph:"[pe-KE-nu]", de:"Klein", cat:"Adjektive"},
+    {pt:"Melhor", ph:"[me-LYOR]", de:"Besser / Am besten", cat:"Adjektive"},
+    {pt:"Pior", ph:"[pi-OR]", de:"Schlechter / Am schlechtesten", cat:"Adjektive"},
+    {pt:"Certo/a", ph:"[SER-tu]", de:"Richtig", cat:"Adjektive"},
+    {pt:"Errado/a", ph:"[e-HA-du]", de:"Falsch", cat:"Adjektive"},
+    {pt:"Novo/a", ph:"[NO-vu]", de:"Neu / Jung", cat:"Adjektive"},
+    {pt:"Velho/a", ph:"[VE-lyu]", de:"Alt", cat:"Adjektive"},
+    {pt:"Fácil", ph:"[FA-sil]", de:"Einfach", cat:"Adjektive"},
+    {pt:"Difícil", ph:"[dji-FI-sil]", de:"Schwer / Schwierig", cat:"Adjektive"},
+    {pt:"Bonito/a", ph:"[bo-NI-tu]", de:"Schön", cat:"Adjektive"},
+    {pt:"Feio/a", ph:"[FEI-yu]", de:"Hässlich", cat:"Adjektive"},
+    {pt:"Forte", ph:"[FOR-tji]", de:"Stark", cat:"Adjektive"},
+    {pt:"Fraco/a", ph:"[FRA-ku]", de:"Schwach", cat:"Adjektive"},
+    {pt:"Feliz", ph:"[fe-LIS]", de:"Glücklich", cat:"Adjektive"},
+    {pt:"Triste", ph:"[TRIS-tji]", de:"Traurig", cat:"Adjektive"},
+    {pt:"Diferente", ph:"[dji-fe-REN-tji]", de:"Anders / Unterschiedlich", cat:"Adjektive"},
+    {pt:"Importante", ph:"[im-por-TAN-tji]", de:"Wichtig", cat:"Adjektive"},
+    {pt:"Caro / Barato", ph:"[KA-ru]", de:"Teuer / Billig", cat:"Adjektive"},
+
+    // --- ESSEN, HAUS & ORTE ---
+    {pt:"Casa", ph:"[KA-za]", de:"Haus / Zuhause", cat:"Essen & Haus"},
+    {pt:"Cozinha", ph:"[ko-ZING-ya]", de:"Küche", cat:"Essen & Haus"},
+    {pt:"Banheiro", ph:"[ban-YEI-ru]", de:"Badezimmer", cat:"Essen & Haus"},
+    {pt:"Quarto", ph:"[KWAR-tu]", de:"Zimmer", cat:"Essen & Haus"},
+    {pt:"Cama / Mesa", ph:"[KA-ma]", de:"Bett / Tisch", cat:"Essen & Haus"},
+    {pt:"Porta / Janela", ph:"[POR-ta]", de:"Tür / Fenster", cat:"Essen & Haus"},
+    {pt:"Chave", ph:"[SHA-vi]", de:"Schlüssel", cat:"Essen & Haus"},
+    {pt:"Comida", ph:"[ko-MI-da]", de:"Essen", cat:"Essen & Haus"},
+    {pt:"Água / Café", ph:"[A-gwa]", de:"Wasser / Kaffee", cat:"Essen & Haus"},
+    {pt:"Pão / Arroz", ph:"[paung]", de:"Brot / Reis", cat:"Essen & Haus"},
+    {pt:"Carne / Peixe", ph:"[KAR-nji]", de:"Fleisch / Fisch", cat:"Essen & Haus"},
+    {pt:"Fruta / Maçã", ph:"[FRU-ta]", de:"Obst / Apfel", cat:"Essen & Haus"},
+    {pt:"Leite / Açúcar", ph:"[LEI-tji]", de:"Milch / Zucker", cat:"Essen & Haus"},
     {pt:"Rua", ph:"[HU-a]", de:"Straße", cat:"Orte & Reise"},
     {pt:"Cidade", ph:"[si-DA-dji]", de:"Stadt", cat:"Orte & Reise"},
     {pt:"Praia", ph:"[PRAI-ya]", de:"Strand", cat:"Orte & Reise"},
-    {pt:"Carro", ph:"[KA-hu]", de:"Auto", cat:"Orte & Reise"},
-    {pt:"Avião", ph:"[a-vi-AUNG]", de:"Flugzeug", cat:"Orte & Reise"},
+    {pt:"Academia", ph:"[a-ka-de-MIA]", de:"Fitnessstudio", cat:"Orte & Reise"},
+    {pt:"Carro / Avião", ph:"[KA-hu]", de:"Auto / Flugzeug", cat:"Orte & Reise"},
     {pt:"Ônibus", ph:"[O-ni-bus]", de:"Bus", cat:"Orte & Reise"},
-    {pt:"Bilhete", ph:"[bi-LYE-tji]", de:"Ticket", cat:"Orte & Reise"},
     {pt:"Hotel", ph:"[o-TEL]", de:"Hotel", cat:"Orte & Reise"},
+    {pt:"Aqui / Lá", ph:"[a-KI]", de:"Hier / Dort", cat:"Orte & Reise"},
+    {pt:"Perto / Longe", ph:"[PER-tu]", de:"Nah / Weit weg", cat:"Orte & Reise"},
+    {pt:"Esquerda / Direita", ph:"[es-KER-da]", de:"Links / Rechts", cat:"Orte & Reise"},
     {pt:"Onde?", ph:"[ON-dji]", de:"Wo?", cat:"Orte & Reise"},
-    {pt:"Aqui", ph:"[a-KI]", de:"Hier", cat:"Orte & Reise"},
-    {pt:"Lá", ph:"[la]", de:"Dort", cat:"Orte & Reise"},
-    {pt:"Esquerda", ph:"[es-KER-da]", de:"Links", cat:"Orte & Reise"},
-    {pt:"Direita", ph:"[di-REI-ta]", de:"Rechts", cat:"Orte & Reise"},
-    {pt:"Perto", ph:"[PER-tu]", de:"Nah", cat:"Orte & Reise"},
-    {pt:"Longe", ph:"[LONG-ji]", de:"Weit weg", cat:"Orte & Reise"},
-    {pt:"Grande", ph:"[GRAN-dji]", de:"Groß", cat:"Adjektive"},
-    {pt:"Pequeno", ph:"[pe-KE-nu]", de:"Klein", cat:"Adjektive"},
-    {pt:"Bom", ph:"[bom]", de:"Gut", cat:"Adjektive"},
-    {pt:"Mau", ph:"[maw]", de:"Schlecht", cat:"Adjektive"},
-    {pt:"Bonito", ph:"[bo-NI-tu]", de:"Schön", cat:"Adjektive"},
-    {pt:"Feio", ph:"[FEI-yu]", de:"Hässlich", cat:"Adjektive"},
-    {pt:"Novo", ph:"[NO-vu]", de:"Neu / Jung", cat:"Adjektive"},
-    {pt:"Velho", ph:"[VE-lyu]", de:"Alt", cat:"Adjektive"},
-    {pt:"Caro", ph:"[KA-ru]", de:"Teuer", cat:"Adjektive"},
-    {pt:"Barato", ph:"[ba-RA-tu]", de:"Billig", cat:"Adjektive"},
+
+    // --- KÖRPER & GEFÜHLE ---
     {pt:"Corpo", ph:"[KOR-pu]", de:"Körper", cat:"Körper & Seele"},
-    {pt:"Mão", ph:"[maung]", de:"Hand", cat:"Körper & Seele"},
-    {pt:"Pé", ph:"[pe]", de:"Fuß", cat:"Körper & Seele"},
     {pt:"Cabeça", ph:"[ka-BE-sa]", de:"Kopf", cat:"Körper & Seele"},
     {pt:"Olhos", ph:"[O-lyus]", de:"Augen", cat:"Körper & Seele"},
     {pt:"Coração", ph:"[ko-ra-SAUNG]", de:"Herz", cat:"Körper & Seele"},
+    {pt:"Pé", ph:"[pe]", de:"Fuß", cat:"Körper & Seele"},
     {pt:"Amor", ph:"[a-MOR]", de:"Liebe", cat:"Körper & Seele"},
-    {pt:"Feliz", ph:"[fe-LIS]", de:"Glücklich", cat:"Körper & Seele"},
-    {pt:"Triste", ph:"[TRIS-tji]", de:"Traurig", cat:"Körper & Seele"},
-    {pt:"Cansado", ph:"[kan-SA-du]", de:"Müde", cat:"Körper & Seele"},
-    {pt:"Fome", ph:"[FO-mi]", de:"Hunger", cat:"Körper & Seele"},
-    {pt:"Sede", ph:"[SE-dji]", de:"Durst", cat:"Körper & Seele"},
-    {pt:"Sol", ph:"[sol]", de:"Sonne", cat:"Wetter"},
-    {pt:"Chuva", ph:"[SHU-va]", de:"Regen", cat:"Wetter"},
-    {pt:"Frio", ph:"[FRI-yu]", de:"Kalt", cat:"Wetter"},
-    {pt:"Calor", ph:"[ka-LOR]", de:"Warm / Hitze", cat:"Wetter"},
-    {pt:"Vento", ph:"[VEN-tu]", de:"Wind", cat:"Wetter"},
+    {pt:"Cansado/a", ph:"[kan-SA-du]", de:"Müde", cat:"Körper & Seele"},
+    {pt:"Fome / Sede", ph:"[FO-mi]", de:"Hunger / Durst", cat:"Körper & Seele"},
+
+    // --- WETTER ---
     {pt:"Tempo", ph:"[TEM-pu]", de:"Zeit / Wetter", cat:"Wetter"},
-    {pt:"Céu", ph:"[sew]", de:"Himmel", cat:"Wetter"},
-    {pt:"Luz", ph:"[lus]", de:"Licht", cat:"Basics"},
-    {pt:"Mundo", ph:"[MUN-du]", de:"Welt", cat:"Basics"},
-    {pt:"Pessoa", ph:"[pe-SO-a]", de:"Person", cat:"Basics"},
-    {pt:"Lugar", ph:"[lu-GAR]", de:"Ort", cat:"Basics"},
-    {pt:"Coisa", ph:"[KOI-za]", de:"Ding / Sache", cat:"Basics"},
-    {pt:"Saúde", ph:"[sa-U-dji]", de:"Gesundheit", cat:"Basics"}
+    {pt:"Sol / Chuva", ph:"[sol]", de:"Sonne / Regen", cat:"Wetter"},
+    {pt:"Frio / Calor", ph:"[FRI-yu]", de:"Kalt / Warm", cat:"Wetter"},
+    {pt:"Vento / Céu", ph:"[VEN-tu]", de:"Wind / Himmel", cat:"Wetter"}
 ];
 
 let currentDeck = [...DATA];
@@ -279,6 +304,7 @@ let knownIds = new Set(JSON.parse(localStorage.getItem('ptKnown') || '[]'));
 function initFilter() {
     const cats = ["Alle", ...new Set(DATA.map(d => d.cat))];
     const container = document.getElementById('catFilter');
+    container.innerHTML = "";
     cats.forEach(c => {
         const btn = document.createElement('button');
         btn.className = 'cat-btn' + (c === 'Alle' ? ' active' : '');
@@ -344,19 +370,13 @@ function render() {
     document.getElementById('progressLabel').innerText = `${idx + 1} / ${currentDeck.length}`;
 }
 
-// NEUE TEILEN-FUNKTION
 function shareProgress() {
     const total = DATA.length;
     const known = knownIds.size;
     const pct = Math.round((known/total)*100);
-    const text = `🇧🇷 Mein Portugiesisch-Fortschritt:\n✅ ${known} von ${total} Vokabeln gelernt (${pct}%)\n🚀 Trainiert mit dem Vokabel-Master!`;
-    
-    if (navigator.share) {
-        navigator.share({ title: 'Portugiesisch Fortschritt', text: text });
-    } else {
-        navigator.clipboard.writeText(text);
-        alert("Fortschritt als Text kopiert!");
-    }
+    const text = `🇧🇷 Portugiesisch-Fortschritt:\n✅ ${known} von ${total} Vokabeln gelernt (${pct}%)\n🚀 Trainiert mit dem Vokabel-Master!`;
+    if (navigator.share) { navigator.share({ title: 'Fortschritt', text: text }); } 
+    else { navigator.clipboard.writeText(text); alert("Kopiert!"); }
 }
 
 initFilter();

@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portugiesisch Satzbau-Trainer PRO+</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-light: #dbeafe;
+            --success: #16a34a;
+            --success-light: #dcfce7;
+            --danger: #dc2626;
+            --danger-light: #fee2e2;
+            --warning: #ca8a04;
+            --warning-light: #fef9c3;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-sec: #64748b;
+            --border: #e2e8f0;
+            --radius: 12px;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.5;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .app {
+            max-width: 800px;
+            width: 100%;
+            padding: 10px;
+        }
+
+        h2.title {
+            text-align: center;
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .top-bar {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            align-items: center;
+        }
+
+        .stat-pill {
+            background: var(--primary-light);
+            border-radius: 99px;
+            padding: 6px 14px;
+            font-size: 13px;
+            color: var(--primary);
+            border: 1px solid #bfdbfe;
+            white-space: nowrap;
+        }
+
+        .stat-pill b { color: #1e40af; }
+
+        .cat-row {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .cat-btn {
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            background: var(--card-bg);
+            color: var(--text-sec);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .cat-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .ex-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .ex-badge {
+            display: inline-block;
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+        }
+
+        .german-sentence {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--text-main);
+        }
+
+        .hint-text {
+            font-size: 13px;
+            color: var(--text-sec);
+            margin-bottom: 15px;
+        }
+
+        .build-zone {
+            min-height: 70px;
+            border: 2px dashed var(--border);
+            border-radius: var(--radius);
+            padding: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 15px;
+            background: #fafafa;
+        }
+
+        .build-zone.success { border-color: var(--success); background: var(--success-light); }
+        .build-zone.error { border-color: var(--danger); background: var(--danger-light); }
+
+        .block {
+            padding: 10px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: white;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: all 0.1s;
+        }
+
+        .block:hover { border-color: var(--primary); transform: translateY(-2px); }
+        .block.placed { opacity: 0.3; cursor: default; }
+        
+        .bank {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 15px;
+            background: #f1f5f9;
+            border-radius: var(--radius);
+            margin-bottom: 15px;
+        }
+
+        .feedback-row { min-height: 24px; font-size: 14px; font-weight: 600; margin-bottom: 10px; }
+
+        .phonetic {
+            background: var(--success-light);
+            color: #166534;
+            border-radius: 8px;
+            padding: 12px;
+            font-style: italic;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--success);
+            font-size: 14px;
+        }
+
+        .btn-row { display: flex; gap: 8px; flex-wrap: wrap; }
+        .action-btn {
+            padding: 10px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: white;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        .action-btn.primary { background: var(--primary); color: white; border-color: var(--primary); }
+
+        .vocab-bar {
+            background: white;
+            padding: 15px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        .vocab-track { height: 10px; background: #e2e8f0; border-radius: 5px; overflow: hidden; margin: 8px 0; }
+        .vocab-fill { height: 100%; background: var(--success); transition: width 0.5s; }
+
+        .streak-dot { width: 10px; height: 10px; border-radius: 50%; background: #e2e8f0; }
+        .streak-dot.done { background: var(--success); }
+        .streak-row { display: flex; gap: 6px; margin-left: auto; }
+    </style>
+</head>
+<body>
+
+<div class="app">
+    <h2 class="title">🇧🇷 Portugiesisch Trainer PRO+</h2>
+
+    <div class="top-bar">
+        <div class="stat-pill">Versuche: <b id="sSolved">0</b></div>
+        <div class="stat-pill">Davon richtig: <b id="sCorrect">0</b></div>
+        <div class="streak-row" id="streakRow"></div>
+    </div>
+
+    <div class="cat-row" id="catRow"></div>
+
+    <div class="ex-card">
+        <span class="ex-badge" id="exBadge">Alltag</span>
+        <div class="german-sentence" id="germanSent">Lade...</div>
+        <div class="hint-text">Bringe die Wörter in die richtige Reihenfolge:</div>
+
+        <div class="build-zone" id="buildZone"></div>
+
+        <div class="bank" id="wordBank"></div>
+
+        <div class="feedback-row" id="feedbackRow"></div>
+        <div id="phoneticBox" style="display:none" class="phonetic"></div>
+
+        <div class="btn-row">
+            <button class="action-btn" onclick="undoLast()">Zurück</button>
+            <button class="action-btn" onclick="clearBuild()">Löschen</button>
+            <button class="action-btn" onclick="showHint()">Tipp</button>
+            <button class="action-btn primary" onclick="nextSentence()" id="btnNext">Nächster Satz →</button>
+        </div>
+    </div>
+
+    <div class="vocab-bar">
+        <div style="font-size: 14px; font-weight: bold;">Lernfortschritt (100 Sätze verfügbar)</div>
+        <div class="vocab-track"><div class="vocab-fill" id="vocabFill" style="width:0%"></div></div>
+        <div style="font-size:12px; color:var(--text-sec)" id="vocabPct">0 von 100 Sätzen gemeistert</div>
+    </div>
+</div>
+
+<script>
+const DB = [
+    // 1. ALLTAG (10)
+    {cat:"Alltag",de:"Ich trinke jeden Morgen Kaffee.",pt:["Eu","bebo","café","toda","manhã."],ph:"[eu BE-bu ka-FE TO-da man-YAH]"},
+    {cat:"Alltag",de:"Er geht zur Arbeit.",pt:["Ele","vai","para","o","trabalho."],ph:"[E-li VAI PA-ra u tra-BA-lyu]"},
+    {cat:"Alltag",de:"Wir wohnen in einer großen Stadt.",pt:["Moramos","em","uma","cidade","grande."],ph:"[mo-RA-mus eng U-ma si-DA-dji GRAN-dji]"},
+    {cat:"Alltag",de:"Ich spreche ein wenig Portugiesisch.",pt:["Eu","falo","um","pouco","de","português."],ph:"[eu FA-lu ung POU-ku dji por-tu-GAYS]"},
+    {cat:"Alltag",de:"Um wie viel Uhr stehst du auf?",pt:["A","que","horas","você","acorda?"],ph:"[a ke O-ras vo-SE a-KOR-da]"},
+    {cat:"Alltag",de:"Sie liest abends ein Buch.",pt:["Ela","lê","um","livro","à","noite."],ph:"[E-la leh ung LI-vru a NOY-tji]"},
+    {cat:"Alltag",de:"Ich mache meine Hausaufgaben.",pt:["Eu","faço","meu","dever","de","casa."],ph:"[eu FA-su meu de-VER dji KA-za]"},
+    {cat:"Alltag",de:"Hast du heute Zeit?",pt:["Você","tem","tempo","hoje?"],ph:"[vo-SE teng TEM-pu O-ji]"},
+    {cat:"Alltag",de:"Es ist sehr spät.",pt:["Já","é","muito","tarde."],ph:"[zha eh MUI-tu TAR-dji]"},
+    {cat:"Alltag",de:"Ich muss jetzt gehen.",pt:["Eu","preciso","ir","agora."],ph:"[eu pre-SI-zu IR a-GO-ra]"},
+
+    // 2. ESSEN & TRINKEN (10)
+    {cat:"Essen",de:"Ich möchte ein Glas Wasser, bitte.",pt:["Quero","um","copo","de","água,","por","favor."],ph:"[KE-ru ung KO-pu dji A-gwa por fa-VOR]"},
+    {cat:"Essen",de:"Die Rechnung bitte.",pt:["A","conta,","por","favor."],ph:"[a KON-ta por fa-VOR]"},
+    {cat:"Essen",de:"Das Essen ist sehr lecker.",pt:["A","comida","está","muito","gostosa."],ph:"[a ko-MI-da es-TA MUI-tu gos-TO-za]"},
+    {cat:"Essen",de:"Ich bin Vegetarier.",pt:["Eu","sou","vegetariano."],ph:"[eu sou ve-zhe-ta-ri-A-nu]"},
+    {cat:"Essen",de:"Haben Sie einen Tisch für zwei?",pt:["Você","tem","uma","mesa","para","dois?"],ph:"[vo-SE teng U-ma ME-za PA-ra DOYS]"},
+    {cat:"Essen",de:"Ich hätte gerne ein Bier.",pt:["Eu","gostaria","de","uma","cerveja."],ph:"[eu gos-ta-RI-a dji U-ma ser-VE-zha]"},
+    {cat:"Essen",de:"Was ist die Spezialität des Hauses?",pt:["Qual","é","a","especialidade","da","casa?"],ph:"[kwal eh a es-pe-sya-li-DA-dji da KA-za]"},
+    {cat:"Essen",de:"Ich mag kein scharfes Essen.",pt:["Não","gosto","de","comida","picante."],ph:"[naung GOS-tu dji ko-MI-da pi-KAN-tji]"},
+    {cat:"Essen",de:"Können wir bestellen?",pt:["Podemos","fazer","o","pedido?"],ph:"[po-DE-mus fa-ZER u pe-DJI-du]"},
+    {cat:"Essen",de:"Guten Appetit!",pt:["Bom","apetite!"],ph:"[bong a-pe-TJI-tji]"},
+
+    // 3. GEFÜHLE (10)
+    {cat:"Gefühle",de:"Ich bin heute sehr glücklich.",pt:["Estou","muito","feliz","hoje."],ph:"[es-TOU MUI-tu fe-LIZ O-ji]"},
+    {cat:"Gefühle",de:"Warum bist du traurig?",pt:["Por","que","você","está","triste?"],ph:"[por ke vo-SE es-TA TRIS-tji]"},
+    {cat:"Gefühle",de:"Ich bin sehr müde.",pt:["Estou","muito","cansado."],ph:"[es-TOU MUI-tu kan-SA-du]"},
+    {cat:"Gefühle",de:"Er ist in sie verliebt.",pt:["Ele","está","apaixonado","por","ela."],ph:"[E-li es-TA a-pai-sho-NA-du por E-la]"},
+    {cat:"Gefühle",de:"Ich habe heute viel Stress.",pt:["Estou","muito","estressado","hoje."],ph:"[es-TOU MUI-tu es-tre-SA-du O-ji]"},
+    {cat:"Gefühle",de:"Sie ist eine sehr nette Person.",pt:["Ela","é","uma","pessoa","muito","simpática."],ph:"[E-la eh U-ma pe-SO-a MUI-tu sim-PA-tji-ka]"},
+    {cat:"Gefühle",de:"Ich habe Angst.",pt:["Estou","com","medo."],ph:"[es-TOU kong ME-du]"},
+    {cat:"Gefühle",de:"Bist du sauer auf mich?",pt:["Você","está","bravo","comigo?"],ph:"[vo-SE es-TA BRA-vu ko-MI-gu]"},
+    {cat:"Gefühle",de:"Wir sind sehr stolz auf dich.",pt:["Estamos","muito","orgulhosos","de","você."],ph:"[es-TA-mus MUI-tu or-gu-LYO-zus dji vo-SE]"},
+    {cat:"Gefühle",de:"Ich fühle mich heute besser.",pt:["Sinto-me","melhor","hoje."],ph:"[SIN-tu-mi me-LYOR O-ji]"},
+
+    // 4. REISEN (10)
+    {cat:"Reisen",de:"Wo ist der Bahnhof?",pt:["Onde","fica","a","estação","de","trem?"],ph:"[ON-dji FI-ka a es-ta-SAUNG dji treng]"},
+    {cat:"Reisen",de:"Ein Ticket nach Lissabon, bitte.",pt:["Um","bilhete","para","Lisboa,","por","favor."],ph:"[ung bi-LYE-tji PA-ra liz-BO-a por fa-VOR]"},
+    {cat:"Reisen",de:"Wann fährt der nächste Bus?",pt:["Quando","sai","o","próximo","ônibus?"],ph:"[KWAN-du sai u PRO-si-mu O-ni-bus]"},
+    {cat:"Reisen",de:"Ich habe meinen Reisepass verloren.",pt:["Perdi","o","meu","passaporte."],ph:"[per-DJI u meu pa-sa-POR-tji]"},
+    {cat:"Reisen",de:"Ist das Hotel weit von hier?",pt:["O","hotel","é","longe","daqui?"],ph:"[u o-TEW eh LON-zhe da-KI]"},
+    {cat:"Reisen",de:"Ich möchte ein Auto mieten.",pt:["Quero","alugar","um","carro."],ph:"[KE-ru a-lu-GAR ung KA-hu]"},
+    {cat:"Reisen",de:"Können Sie mir helfen?",pt:["Pode","ajudar-me?"],ph:"[PO-dji a-zhu-DAR-mi]"},
+    {cat:"Reisen",de:"Wie komme ich zum Strand?",pt:["Como","chego","à","praia?"],ph:"[KO-mu SHE-gu a PRA-ya]"},
+    {cat:"Reisen",de:"Gute Reise!",pt:["Boa","viagem!"],ph:"[BO-a vi-A-zheng]"},
+    {cat:"Reisen",de:"Ich bin Tourist.",pt:["Eu","sou","turista."],ph:"[eu sou tu-RIS-ta]"},
+
+    // 5. ARBEIT (10)
+    {cat:"Arbeit",de:"Ich habe heute ein wichtiges Meeting.",pt:["Tenho","uma","reunião","importante","hoje."],ph:"[TEN-yu U-ma he-u-ni-AUNG im-por-TAN-tji O-ji]"},
+    {cat:"Arbeit",de:"Was ist dein Beruf?",pt:["Qual","é","a","sua","profissão?"],ph:"[kwal eh a SU-a pro-fi-SAUNG]"},
+    {cat:"Arbeit",de:"Ich arbeite in einem Büro.",pt:["Trabalho","em","um","escritório."],ph:"[tra-BA-lyu eng ung es-kri-TO-ryu]"},
+    {cat:"Arbeit",de:"Ich suche einen Job.",pt:["Estou","procurando","um","emprego."],ph:"[es-TOU pro-ku-RAN-du ung em-PRE-gu]"},
+    {cat:"Arbeit",de:"Mein Chef ist sehr streng.",pt:["Meu","chefe","é","muito","exigente."],ph:"[meu SHE-fi eh MUI-tu e-zi-ZHEN-tji]"},
+    {cat:"Arbeit",de:"Wann beginnt die Pause?",pt:["Quando","começa","o","intervalo?"],ph:"[KWAN-du ko-ME-sa u in-ter-VA-lu]"},
+    {cat:"Arbeit",de:"Ich schicke dir eine E-Mail.",pt:["Vou","enviar-lhe","um","e-mail."],ph:"[vou en-vi-AR-lyi ung i-ME-iu]"},
+    {cat:"Arbeit",de:"Er verdient viel Geld.",pt:["Ele","ganha","muito","dinheiro."],ph:"[E-li GA-nya MUI-tu dji-NYAY-ru]"},
+    {cat:"Arbeit",de:"Wir müssen das Projekt beenden.",pt:["Temos","que","terminar","o","projeto."],ph:"[TE-mus ke ter-mi-NAR u pro-ZHE-tu]"},
+    {cat:"Arbeit",de:"Ich bin morgen auf Geschäftsreise.",pt:["Estarei","em","viagem","de","negócios","amanhã."],ph:"[es-ta-REI eng vi-A-zheng dji ne-GO-syus a-man-YAH]"},
+
+    // 6. EINKAUFEN (10)
+    {cat:"Einkaufen",de:"Wie viel kostet das Kleid?",pt:["Quanto","custa","esse","vestido?"],ph:"[KWAN-tu KUS-ta E-si ves-TJI-du]"},
+    {cat:"Einkaufen",de:"Ich schaue mich nur um.",pt:["Só","estou","a","olhar."],ph:"[so es-TOU a o-LYAR]"},
+    {cat:"Einkaufen",de:"Kann ich mit Karte zahlen?",pt:["Posso","pagar","com","cartão?"],ph:"[PO-su pa-GAR kong kar-TAUNG]"},
+    {cat:"Einkaufen",de:"Gibt es einen Rabatt?",pt:["Tem","algum","desconto?"],ph:"[teng au-GUNG des-KON-tu]"},
+    {cat:"Einkaufen",de:"Wo sind die Umkleidekabinen?",pt:["Onde","ficam","os","provadores?"],ph:"[ON-dji FI-kang us pro-va-DO-ris]"},
+    {cat:"Einkaufen",de:"Das ist mir zu teuer.",pt:["Isso","é","muito","caro","para","mim."],ph:"[I-su eh MUI-tu KA-ru PA-ra ming]"},
+    {cat:"Einkaufen",de:"Ich nehme es.",pt:["Vou","levar","este."],ph:"[vou le-VAR ES-tji]"},
+    {cat:"Einkaufen",de:"Haben Sie das in Größe M?",pt:["Você","tem","isso","no","tamanho","M?"],ph:"[vo-SE teng I-su nu ta-MA-nyu E-mi]"},
+    {cat:"Einkaufen",de:"Ich brauche eine Tüte.",pt:["Preciso","de","um","saco."],ph:"[pre-SI-zu dji ung SA-ku]"},
+    {cat:"Einkaufen",de:"Wo ist der Supermarkt?",pt:["Onde","fica","o","supermercado?"],ph:"[ON-dji FI-ka u su-per-mer-KA-du]"},
+
+    // 7. FAMILIE (10)
+    {cat:"Familie",de:"Meine Mutter heißt Maria.",pt:["Minha","mãe","se","chama","Maria."],ph:"[MIN-ya MAUNG si SHA-ma Ma-RI-a]"},
+    {cat:"Familie",de:"Mein Vater arbeitet in einer Bank.",pt:["Meu","pai","trabalha","em","um","banco."],ph:"[meu PAI tra-BA-lya eng ung BAN-ku]"},
+    {cat:"Familie",de:"Ich habe einen Bruder und zwei Schwestern.",pt:["Tenho","um","irmão","e","duas","irmãs."],ph:"[TEN-yu ung ir-MAUNG i DU-as ir-MAHS]"},
+    {cat:"Familie",de:"Mein Neffe ist sehr lustig.",pt:["Meu","sobrinho","é","muito","engraçado."],ph:"[meu so-BRIN-yu eh MUI-tu en-gra-SA-du]"},
+    {cat:"Familie",de:"Meine Tante wohnt in Portugal.",pt:["Minha","tia","mora","em","Portugal."],ph:"[MIN-ya CHI-a MO-ra eng Por-tu-GAW]"},
+    {cat:"Familie",de:"Mein Onkel kocht sehr gut.",pt:["Meu","tio","cozinha","muito","bem."],ph:"[meu CHI-u ko-ZIN-ya MUI-tu beng]"},
+    {cat:"Familie",de:"Das ist mein bester Freund.",pt:["Este","é","o","meu","melhor","amigo."],ph:"[ES-tji eh u meu me-LYOR a-MI-gu]"},
+    {cat:"Familie",de:"Wir besuchen unsere Großeltern.",pt:["Visitamos","nossos","avós."],ph:"[vi-zi-TA-mus NO-sus a-VOHS]"},
+    {cat:"Familie",de:"Hast du Kinder?",pt:["Você","tem","filhos?"],ph:"[vo-SE teng FI-lyus]"},
+    {cat:"Familie",de:"Meine Cousine kommt morgen.",pt:["Minha","prima","vem","amanhã."],ph:"[MIN-ya PRI-ma veng a-man-YAH]"},
+
+    // 8. TIERE (10)
+    {cat:"Tiere",de:"Der Hund spielt im Garten.",pt:["O","cachorro","brinca","no","jardim."],ph:"[u ka-SHO-hu BRIN-ka nu jar-JING]"},
+    {cat:"Tiere",de:"Ich habe eine schwarze Katze.",pt:["Tenho","um","gato","preto."],ph:"[TEN-yu ung GA-tu PRE-tu]"},
+    {cat:"Tiere",de:"Das Pferd läuft schnell.",pt:["O","cavalo","corre","rápido."],ph:"[u ka-VA-lu KO-hi RA-pi-du]"},
+    {cat:"Tiere",de:"Dort ist ein großer Elefant.",pt:["Lá","está","um","elefante","grande."],ph:"[la es-TA ung e-le-FAN-tji GRAN-dji]"},
+    {cat:"Tiere",de:"Vögel singen am Morgen.",pt:["Os","pássaros","cantam","de","manhã."],ph:"[us PA-sa-rus KAN-tang dji man-YAH]"},
+    {cat:"Tiere",de:"Ich habe Angst vor Spinnen.",pt:["Tenho","medo","de","aranhas."],ph:"[TEN-yu ME-du dji a-RA-nyas]"},
+    {cat:"Tiere",de:"Der Löwe ist der König der Tiere.",pt:["O","leão","é","o","rei","dos","animais."],ph:"[u le-AUNG eh u REY dus a-ni-MAIS]"},
+    {cat:"Tiere",de:"Die Kuh gibt Milch.",pt:["A","vaca","dá","leite."],ph:"[a VA-ka da LAY-tji]"},
+    {cat:"Tiere",de:"Fische schwimmen im Meer.",pt:["Os","peixes","nadam","no","mar."],ph:"[us PAY-shis NA-dang nu mar]"},
+    {cat:"Tiere",de:"Mein Kaninchen isst Karotten.",pt:["Meu","coelho","come","cenouras."],ph:"[meu ku-E-lyu KO-mi se-NOU-ras]"},
+
+    // 9. SCHULE & LERNEN (10)
+    {cat:"Schule",de:"Ich lerne jeden Tag neue Wörter.",pt:["Eu","aprendo","palavras","novas","todos","os","dias."],ph:"[eu a-PREN-du pa-LA-vras NO-vas TO-dus us DJI-as]"},
+    {cat:"Schule",de:"Die Lehrerin erklärt die Grammatik.",pt:["A","professora","explica","a","gramática."],ph:"[a pro-fe-SO-ra es-PLI-ka a gra-MA-tji-ka]"},
+    {cat:"Schule",de:"Hast du das Buch gelesen?",pt:["Você","leu","o","livro?"],ph:"[vo-SE leu u LI-vru]"},
+    {cat:"Schule",de:"Ich verstehe diese Übung nicht.",pt:["Não","entendo","este","exercício."],ph:"[naung en-TEN-du ES-tji e-zer-SI-syu]"},
+    {cat:"Schule",de:"Die Bibliothek ist montags geschlossen.",pt:["A","biblioteca","está","fechada","às","segundas."],ph:"[a bi-blyu-TE-ka es-TA fe-SHA-da as se-GUN-das]"},
+    {cat:"Schule",de:"Wo ist mein Kugelschreiber?",pt:["Onde","está","a","minha","caneta?"],ph:"[ON-dji es-TA a MIN-ya ka-NE-ta]"},
+    {cat:"Schule",de:"Wir haben morgen eine Prüfung.",pt:["Temos","um","exame","amanhã."],ph:"[TE-mus ung e-ZA-mi a-man-YAH]"},
+    {cat:"Schule",de:"Portugiesisch ist eine schöne Sprache.",pt:["Português","é","uma","língua","bonita."],ph:"[por-tu-GAYS eh U-ma LIN-gwa bu-NI-ta]"},
+    {cat:"Schule",de:"Kannst du das bitte wiederholen?",pt:["Pode","repetir,","por","favor?"],ph:"[PO-dji re-pe-CHIR por fa-VOR]"},
+    {cat:"Schule",de:"Ich mache einen Sprachkurs.",pt:["Estou","fazendo","um","curso","de","idiomas."],ph:"[es-TOU fa-ZEN-du ung KUR-su dji i-DYO-mas]"},
+
+    // 10. WETTER & ZEIT (10)
+    {cat:"Wetter",de:"Heute scheint die Sonne.",pt:["Hoje","o","sol","está","brilhando."],ph:"[O-ji u SOW es-TA bri-LYAN-du]"},
+    {cat:"Wetter",de:"Morgen wird es regnen.",pt:["Vai","chover","amanhã."],ph:"[vai sho-VER a-man-YAH]"},
+    {cat:"Wetter",de:"Es ist sehr kalt draußen.",pt:["Está","muito","frio","lá","fora."],ph:"[es-TA MUI-tu FRI-u la FO-ra]"},
+    {cat:"Wetter",de:"Im Sommer ist es heiß.",pt:["No","verão","faz","calor."],ph:"[nu ve-RAUNG faz ka-LOR]"},
+    {cat:"Wetter",de:"Es ist sehr windig.",pt:["Está","ventando","muito."],ph:"[es-TA ven-TAN-du MUI-tu]"},
+    {cat:"Wetter",de:"Gestern war es bewölkt.",pt:["Ontem","estava","nublado."],ph:"[ON-teng es-TA-va nu-BLA-du]"},
+    {cat:"Wetter",de:"Ich mag den Frühling.",pt:["Eu","gosto","da","primavera."],ph:"[eu GOS-tu da pri-ma-VE-ra]"},
+    {cat:"Wetter",de:"Siehst du den Regenbogen?",pt:["Você","está","vendo","o","arco-íris?"],ph:"[vo-SE es-TA VEN-du u AR-ku I-ris]"},
+    {cat:"Wetter",de:"Der Winter in Portugal ist mild.",pt:["O","inverno","em","Portugal","é","suave."],ph:"[u in-VER-nu eng Por-tu-GAW eh SU-a-vi]"},
+    {cat:"Wetter",de:"Es schneit in den Bergen.",pt:["Está","nevando","nas","montanhas."],ph:"[es-TA ne-VAN-du nas mon-TA-nyas]"}
+];
+
+const CAT_COLORS = {
+    "Alltag":"#dbeafe;color:#1e40af", "Essen":"#fef3c7;color:#92400e", "Gefühle":"#dcfce7;color:#166534",
+    "Reisen":"#f3e8ff;color:#6b21a8", "Arbeit":"#f1f5f9;color:#475569", "Einkaufen":"#ffedd5;color:#9a3412",
+    "Schule":"#e0f2fe;color:#0369a1", "Technik":"#fae8ff;color:#86198f", "Sport":"#ffefd5;color:#c2410c",
+    "Familie":"#d1fae5;color:#065f46", "Tiere":"#fce7f3;color:#9d174d", "Wetter":"#e0f2fe;color:#075985"
+};
+
+const CATS = ["Alle",...new Set(DB.map(d=>d.cat))];
+let activeCat = "Alle";
+let filteredDB = [...DB];
+let order = [];
+let idx = 0;
+let placed = [];
+let streakHistory = [];
+let solved = 0, correct = 0;
+let masteredSents = new Set(); 
+
+function buildCats(){
+    const row=document.getElementById('catRow');
+    row.innerHTML = '';
+    CATS.forEach(c=>{
+        const b=document.createElement('button');
+        b.className='cat-btn'+(c==="Alle"?' active':'');
+        b.textContent=c;
+        b.onclick=()=>selectCat(c);
+        row.appendChild(b);
+    });
+}
+
+function selectCat(c){
+    activeCat=c;
+    document.querySelectorAll('.cat-btn').forEach(b=>b.classList.toggle('active',b.textContent===c));
+    filteredDB=c==="Alle"?[...DB]:DB.filter(d=>d.cat===c);
+    shuffle();
+    idx=0;
+    loadSentence();
+}
+
+function shuffle(){
+    order=[...Array(filteredDB.length).keys()];
+    for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}
+}
+
+function loadSentence(){
+    if(!order.length)shuffle();
+    const s=filteredDB[order[idx%order.length]];
+    placed=[];
+    document.getElementById('germanSent').textContent=s.de;
+    const badge=document.getElementById('exBadge');
+    badge.textContent=s.cat;
+    badge.style.cssText=CAT_COLORS[s.cat] || "background:#eee";
+    document.getElementById('phoneticBox').style.display='none';
+    document.getElementById('feedbackRow').textContent='';
+    renderBuildZone(false,false);
+    renderBank(s);
+    updateProgress();
+}
+
+function renderBank(s){
+    const bank=document.getElementById('wordBank');
+    bank.innerHTML='';
+    const words=[...s.pt];
+    for(let i=words.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[words[i],words[j]]=[words[j],words[i]];}
+    words.forEach((w,i)=>{
+        const b=document.createElement('button');
+        b.className='block';
+        b.textContent=w;
+        b.onclick=()=>pickWord(b,w);
+        bank.appendChild(b);
+    });
+}
+
+function pickWord(btn,w){
+    if(btn.classList.contains('placed'))return;
+    btn.classList.add('placed');
+    placed.push({word:w,btn});
+    renderBuildZone(false,false);
+    if(placed.length === filteredDB[order[idx%order.length]].pt.length) checkAnswer();
+}
+
+function renderBuildZone(success,error){
+    const zone=document.getElementById('buildZone');
+    zone.innerHTML='';
+    zone.className='build-zone'+(success?' success':error?' error':'');
+    if(!placed.length){
+        zone.innerHTML = '<span style="color:#94a3b8; font-size:13px">Wähle Wörter aus...</span>';
+        return;
+    }
+    placed.forEach((item,i)=>{
+        const b=document.createElement('button');
+        b.className='block';
+        b.textContent=item.word;
+        b.onclick=()=>removePlaced(i);
+        zone.appendChild(b);
+    });
+}
+
+function removePlaced(i){
+    const item=placed.splice(i,1)[0];
+    item.btn.classList.remove('placed');
+    renderBuildZone(false,false);
+}
+
+function undoLast(){ if(placed.length) removePlaced(placed.length-1); }
+
+function clearBuild(){
+    placed.forEach(p=>p.btn.classList.remove('placed'));
+    placed=[];
+    renderBuildZone(false,false);
+}
+
+function checkAnswer(){
+    const currentSent = filteredDB[order[idx%order.length]];
+    const attempt=placed.map(p=>p.word);
+    const isCorrect=JSON.stringify(attempt)===JSON.stringify(currentSent.pt);
+    
+    solved++;
+    document.getElementById('sSolved').textContent=solved;
+    streakHistory.push(isCorrect);
+    if(streakHistory.length>10) streakHistory.shift();
+    renderStreak();
+
+    if(isCorrect){
+        correct++;
+        masteredSents.add(currentSent.de); 
+        document.getElementById('sCorrect').textContent=correct;
+        updateProgress();
+        renderBuildZone(true,false);
+        document.getElementById('phoneticBox').textContent='Aussprache: '+currentSent.ph;
+        document.getElementById('phoneticBox').style.display='block';
+        document.getElementById('feedbackRow').innerHTML='<span style="color:var(--success)">✓ Richtig!</span>';
+    } else {
+        renderBuildZone(false,true);
+        document.getElementById('feedbackRow').innerHTML='<span style="color:var(--danger)">Leider falsch. Versuch es nochmal!</span>';
+        setTimeout(clearBuild, 1200);
+    }
+}
+
+function showHint(){
+    const s=filteredDB[order[idx%order.length]];
+    const next=s.pt[placed.length];
+    if(next) {
+        document.getElementById('feedbackRow').innerHTML=`<span style="color:var(--warning)">Tipp: Nächstes Wort ist "<b>${next}</b>"</span>`;
+    }
+}
+
+function nextSentence(){
+    idx=(idx+1)%order.length;
+    loadSentence();
+}
+
+function renderStreak(){
+    const row=document.getElementById('streakRow');
+    row.innerHTML='';
+    streakHistory.forEach(ok=>{
+        const d=document.createElement('div');
+        d.className='streak-dot'+(ok?' done':'');
+        row.appendChild(d);
+    });
+}
+
+function updateProgress(){
+    const total = DB.length;
+    const count = masteredSents.size;
+    const pct = Math.round((count / total) * 100);
+    document.getElementById('vocabFill').style.width=pct+'%';
+    document.getElementById('vocabPct').textContent = `${count} von ${total} Sätzen gemeistert (${pct}%)`;
+}
+
+buildCats();
+shuffle();
+loadSentence();
+</script>
+</body>
+</html>

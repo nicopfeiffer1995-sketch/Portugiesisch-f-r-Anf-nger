@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deutsche Grammatik | Verben & Artikel</title>
+    <style>
+        :root {
+            --bg-color: #fdfaf1; 
+            --header-bg: #4a0404; 
+            --accent-color: #800020; 
+            --text-color: #2c2c2c;
+            --card-bg: #ffffff;
+            --border-color: #e0d7c6;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.4;
+        }
+
+        header {
+            background-color: var(--header-bg);
+            color: #fdfaf1;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        h1 { margin: 0; font-weight: 300; letter-spacing: 3px; text-transform: uppercase; font-size: 1.8em; }
+
+        nav {
+            background: #fff;
+            padding: 10px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        nav a {
+            margin: 0 8px;
+            text-decoration: none;
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 0.75em;
+            text-transform: uppercase;
+        }
+
+        .container { max-width: 1200px; margin: 20px auto; padding: 10px; }
+
+        h2 { 
+            color: var(--accent-color); 
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+        }
+
+        .tag {
+            font-size: 0.6em;
+            text-transform: uppercase;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 5px;
+        }
+        .regular { background: #e0d7c6; color: #4a0404; }
+        .irregular { background: var(--accent-color); color: white; }
+        .gram-tag { background: #4a0404; color: white; }
+
+        h3 { margin: 5px 0; font-size: 1.1em; color: var(--header-bg); }
+        h3 small { color: #666; font-weight: normal; font-size: 0.75em; display: block; margin-top: 2px;}
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        td, th { padding: 6px 4px; border-bottom: 1px solid #f9f9f9; font-size: 0.85em; text-align: left; }
+        th { color: var(--accent-color); font-variant: small-caps; }
+        .pronoun { color: #999; font-style: italic; width: 45%; }
+        .verb-form { font-weight: bold; color: var(--accent-color); }
+
+        .example-box {
+            background: #fdfaf1;
+            padding: 8px;
+            border-left: 2px solid var(--accent-color);
+            margin-top: 10px;
+            font-size: 0.8em;
+            font-style: italic;
+        }
+
+        footer { text-align: center; padding: 40px; color: #999; font-size: 0.8em; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Deutsche Grammatik</h1>
+    <p>Artikel, Präpositionen und Zeitformen</p>
+</header>
+
+<nav>
+    <a href="#artigos">Artikel</a>
+    <a href="#preposicoes">Präpositionen</a>
+    <a href="#presente">Präsens</a>
+    <a href="#passado">Perfekt</a>
+    <a href="#futuro">Futur I</a>
+</nav>
+
+<div class="container">
+
+    <section id="artigos">
+        <h2>Artikel (Der, Die, Das)</h2>
+        <div class="grid">
+            <div class="card">
+                <span class="tag gram-tag">Bestimmt (Nominativ)</span>
+                <h3>Der / Die / Das</h3>
+                <table>
+                    <tr><th>Genus</th><th>Singular</th><th>Plural</th></tr>
+                    <tr><td>Maskulin</td><td class="verb-form">Der</td><td class="verb-form">Die</td></tr>
+                    <tr><td>Feminin</td><td class="verb-form">Die</td><td class="verb-form">Die</td></tr>
+                    <tr><td>Neutral</td><td class="verb-form">Das</td><td class="verb-form">Die</td></tr>
+                </table>
+            </div>
+            <div class="card">
+                <span class="tag gram-tag">Unbestimmt</span>
+                <h3>Ein / Eine</h3>
+                <table>
+                    <tr><th>Genus</th><th>Singular</th><th>Plural</th></tr>
+                    <tr><td>Maskulin</td><td class="verb-form">Ein</td><td class="verb-form">-</td></tr>
+                    <tr><td>Feminin</td><td class="verb-form">Eine</td><td class="verb-form">-</td></tr>
+                    <tr><td>Neutral</td><td class="verb-form">Ein</td><td class="verb-form">-</td></tr>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section id="preposicoes">
+        <h2>Wichtige Präpositionen</h2>
+        <div class="grid">
+            <div class="card">
+                <span class="tag gram-tag">Lokale Bezüge</span>
+                <h3>In / An / Auf</h3>
+                <table>
+                    <tr><td>in + dem = <span class="verb-form">im</span></td></tr>
+                    <tr><td>an + dem = <span class="verb-form">am</span></td></tr>
+                    <tr><td>auf + das = <span class="verb-form">aufs</span></td></tr>
+                </table>
+                <div class="example-box">Ich bin im Kino. (in dem)</div>
+            </div>
+            <div class="card">
+                <span class="tag gram-tag">Richtungen</span>
+                <h3>Zu / Nach / Aus</h3>
+                <table>
+                    <tr><td>zu + dem = <span class="verb-form">zum</span></td></tr>
+                    <tr><td>zu + der = <span class="verb-form">zur</span></td></tr>
+                </table>
+                <div class="example-box">Ich fahre zur Arbeit. (zu der)</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="presente">
+        <h2>Präsens (Gegenwart)</h2>
+        <div class="grid">
+            <div class="card"><span class="tag regular">Regelmäßig</span><h3>Sprechen</h3><table><tr><td class="pronoun">Ich</td><td class="verb-form">spreche</td></tr><tr><td class="pronoun">Du</td><td class="verb-form">sprichst</td></tr><tr><td class="pronoun">Er/Sie/Es</td><td class="verb-form">spricht</td></tr><tr><td class="pronoun">Wir</td><td class="verb-form">sprechen</td></tr></table></div>
+            <div class="card"><span class="tag regular">Regelmäßig</span><h3>Essen</h3><table><tr><td class="pronoun">Ich</td><td class="verb-form">esse</td></tr><tr><td class="pronoun">Du</td><td class="verb-form">isst</td></tr><tr><td class="pronoun">Er/Sie/Es</td><td class="verb-form">isst</td></tr><tr><td class="pronoun">Wir</td><td class="verb-form">essen</td></tr></table></div>
+            <div class="card"><span class="tag regular">Regelmäßig</span><h3>Öffnen</h3><table><tr><td class="pronoun">Ich</td><td class="verb-form">öffne</td></tr><tr><td class="pronoun">Du</td><td class="verb-form">öffnest</td></tr><tr><td class="pronoun">Er/Sie/Es</td><td class="verb-form">öffnet</td></tr><tr><td class="pronoun">Wir</td><td class="verb-form">öffnen</td></tr></table></div>
+            <div class="card"><span class="tag irregular">Unregelmäßig</span><h3>Sein</h3><table><tr><td class="pronoun">Ich</td><td class="verb-form">bin</td></tr><tr><td class="pronoun">Du</td><td class="verb-form">bist</td></tr><tr><td class="pronoun">Er/Sie/Es</td><td class="verb-form">ist</td></tr><tr><td class="pronoun">Wir</td><td class="verb-form">sind</td></tr></table></div>
+            <div class="card"><span class="tag irregular">Hilfsverb</span><h3>Haben</h3><table><tr><td class="pronoun">Ich</td><td class="verb-form">habe</td></tr><tr><td class="pronoun">Du</td><td class="verb-form">hast</td></tr><tr><td class="pronoun">Er/Sie/Es</td><td class="verb-form">hat</td></tr><tr><td class="pronoun">Wir</td><td class="verb-form">haben</td></tr></table></div>
+            <div class="card"><span class="tag irregular">Unregelmäßig</span><h3>Gehen</h3><table><tr><td class="pronoun">Ich</td><td class="verb-form">gehe</td></tr><tr><td class="pronoun">Du</td><td class="verb-form">gehst</td></tr><tr><td class="pronoun">Er/Sie/Es</td><td class="verb-form">geht</td></tr><tr><td class="pronoun">Wir</td><td class="verb-form">gehen</td></tr></table></div>
+            <div class="card"><span class="tag irregular">Unregelmäßig</span><h3>Machen</h3><table><tr><td class="pronoun">Ich</td><td class="verb-form">mache</td></tr><tr><td class="pronoun">Du</td><td class="verb-form">machst</td></tr><tr><td class="pronoun">Er/Sie/Es</td><td class="verb-form">macht</td></tr><tr><td class="pronoun">Wir</td><td class="verb-form">machen</td></tr></table></div>
+            <div class="card"><span class="tag irregular">Modalverb</span><h3>Wollen</h3><table><tr><td class="pronoun">Ich</td><td class="verb-form">will</td></tr><tr><td class="pronoun">Du</td><td class="verb-form">willst</td></tr><tr><td class="pronoun">Er/Sie/Es</td><td class="verb-form">will</td></tr><tr><td class="pronoun">Wir</td><td class="verb-form">wollen</td></tr></table></div>
+            <div class="card"><span class="tag irregular">Modalverb</span><h3>Können</h3><table><tr><td class="pronoun">Ich</td><td class="verb-form">kann</td></tr><tr><td class="pronoun">Du</td><td class="verb-form">kannst</td></tr><tr><td class="pronoun">Er/Sie/Es</td><td class="verb-form">kann</td></tr><tr><td class="pronoun">Wir</td><td class="verb-form">können</td></tr></table></div>
+            <div class="card"><span class="tag regular">Regelmäßig</span><h3>Sehen</h3><table><tr><td class="pronoun">Ich</td><td class="verb-form">sehe</td></tr><tr><td class="pronoun">Du</td><td class="verb-form">siehst</td></tr><tr><td class="pronoun">Er/Sie/Es</td><td class="verb-form">sieht</td></tr><tr><td class="pronoun">Wir</td><td class="verb-form">sehen</td></tr></table></div>
+            <div class="card"><span class="tag irregular">Unregelmäßig</span><h3>Geben</h3><table><tr><td class="pronoun">Ich</td><td class="verb-form">gebe</td></tr><tr><td class="pronoun">Du</td><td class="verb-form">gibst</td></tr><tr><td class="pronoun">Er/Sie/Es</td><td class="verb-form">gibt</td></tr><tr><td class="pronoun">Wir</td><td class="verb-form">geben</td></tr></table></div>
+            <div class="card"><span class="tag irregular">Unregelmäßig</span><h3>Wissen</h3><table><tr><td class="pronoun">Ich</td><td class="verb-form">weiß</td></tr><tr><td class="pronoun">Du</td><td class="verb-form">weißt</td></tr><tr><td class="pronoun">Er/Sie/Es</td><td class="verb-form">weiß</td></tr><tr><td class="pronoun">Wir</td><td class="verb-form">wissen</td></tr></table></div>
+            <div class="card"><span class="tag regular">Regelmäßig</span><h3>Sagen</h3><table><tr><td class="pronoun">Ich</td><td class="verb-form">sage</td></tr><tr><td class="pronoun">Du</td><td class="verb-form">sagst</td></tr><tr><td class="pronoun">Er/Sie/Es</td><td class="verb-form">sagt</td></tr><tr><td class="pronoun">Wir</td><td class="verb-form">sagen</td></tr></table></div>
+            <div class="card"><span class="tag regular">Regelmäßig</span><h3>Mögen</h3><table><tr><td class="pronoun">Ich</td><td class="verb-form">mag</td></tr><tr><td class="pronoun">Du</td><td class="verb-form">magst</td></tr><tr><td class="pronoun">Er/Sie/Es</td><td class="verb-form">mag</td></tr><tr><td class="pronoun">Wir</td><td class="verb-form">mögen</td></tr></table></div>
+            <div class="card"><span class="tag regular">Regelmäßig</span><h3>Trinken</h3><table><tr><td class="pronoun">Ich</td><td class="verb-form">trinke</td></tr><tr><td class="pronoun">Du</td><td class="verb-form">trinkst</td></tr><tr><td class="pronoun">Er/Sie/Es</td><td class="verb-form">trinkt</td></tr><tr><td class="pronoun">Wir</td><td class="verb-form">trinken</td></tr></table></div>
+        </div>
+    </section>
+
+    <section id="passado">
+        <h2>Perfekt (Vergangenheit)</h2>
+        <div class="grid">
+            <div class="card"><h3>Sprechen</h3><p class="verb-form">hat gesprochen</p></div>
+            <div class="card"><h3>Essen</h3><p class="verb-form">hat gegessen</p></div>
+            <div class="card"><h3>Öffnen</h3><p class="verb-form">hat geöffnet</p></div>
+            <div class="card"><h3>Sein</h3><p class="verb-form">ist gewesen</p></div>
+            <div class="card"><h3>Haben</h3><p class="verb-form">hat gehabt</p></div>
+            <div class="card"><h3>Gehen</h3><p class="verb-form">ist gegangen</p></div>
+            <div class="card"><h3>Machen</h3><p class="verb-form">hat gemacht</p></div>
+            <div class="card"><h3>Wollen</h3><p class="verb-form">hat gewollt</p></div>
+            <div class="card"><h3>Können</h3><p class="verb-form">hat gekonnt</p></div>
+            <div class="card"><h3>Sehen</h3><p class="verb-form">hat gesehen</p></div>
+            <div class="card"><h3>Geben</h3><p class="verb-form">hat gegeben</p></div>
+            <div class="card"><h3>Wissen</h3><p class="verb-form">hat gewusst</p></div>
+            <div class="card"><h3>Sagen</h3><p class="verb-form">hat gesagt</p></div>
+            <div class="card"><h3>Mögen</h3><p class="verb-form">hat gemocht</p></div>
+            <div class="card"><h3>Trinken</h3><p class="verb-form">hat getrunken</p></div>
+        </div>
+    </section>
+
+    <section id="futuro">
+        <h2>Futur I (Zukunft)</h2>
+        <div class="grid">
+            <div class="card"><h3>Alle Verben</h3><p>Bildung mit: <br><span class="verb-form">werden + Infinitiv</span></p>
+                <div class="example-box">Ich werde sprechen.<br>Du wirst gehen.</div>
+            </div>
+            <div class="card"><h3>Beispiele</h3>
+                <ul style="font-size: 0.85em; list-style: none; padding: 0;">
+                    <li>Ich <span class="verb-form">werde essen</span></li>
+                    <li>Er <span class="verb-form">wird sehen</span></li>
+                    <li>Wir <span class="verb-form">werden wissen</span></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    <p>Deutsche Grammatik Übersicht &copy; 2026</p>
+</footer>
+
+</body>
+</html>

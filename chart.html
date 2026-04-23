@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gramática Brasileira | 15 Verbos Essenciais</title>
+    <title>Gramática Brasileira | Completo</title>
     <style>
         :root {
             --bg-color: #fdfaf1; 
@@ -43,11 +43,11 @@
         }
 
         nav a {
-            margin: 0 10px;
+            margin: 0 8px;
             text-decoration: none;
             color: var(--accent-color);
             font-weight: bold;
-            font-size: 0.8em;
+            font-size: 0.75em;
             text-transform: uppercase;
         }
 
@@ -63,7 +63,7 @@
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
             margin-top: 20px;
         }
@@ -76,26 +76,40 @@
         }
 
         .tag {
-            font-size: 0.65em;
+            font-size: 0.6em;
             text-transform: uppercase;
             padding: 2px 6px;
             border-radius: 3px;
             font-weight: bold;
+            display: inline-block;
+            margin-bottom: 5px;
         }
         .regular { background: #e0d7c6; color: #4a0404; }
         .irregular { background: var(--accent-color); color: white; }
+        .gram-tag { background: #4a0404; color: white; }
 
-        h3 { margin: 10px 0; font-size: 1.1em; color: var(--header-bg); }
-        h3 small { color: #888; font-weight: normal; font-size: 0.7em; }
+        h3 { margin: 5px 0; font-size: 1.1em; color: var(--header-bg); }
+        h3 small { color: #666; font-weight: normal; font-size: 0.75em; display: block; margin-top: 2px;}
 
         table {
             width: 100%;
             border-collapse: collapse;
+            margin-top: 10px;
         }
 
-        td { padding: 5px 2px; border-bottom: 1px solid #f9f9f9; font-size: 0.9em; }
-        .pronoun { color: #999; font-style: italic; width: 40%; }
+        td, th { padding: 6px 4px; border-bottom: 1px solid #f9f9f9; font-size: 0.85em; text-align: left; }
+        th { color: var(--accent-color); font-variant: small-caps; }
+        .pronoun { color: #999; font-style: italic; width: 45%; }
         .verb-form { font-weight: bold; color: var(--accent-color); }
+
+        .example-box {
+            background: #fdfaf1;
+            padding: 8px;
+            border-left: 2px solid var(--accent-color);
+            margin-top: 10px;
+            font-size: 0.8em;
+            font-style: italic;
+        }
 
         footer { text-align: center; padding: 40px; color: #999; font-size: 0.8em; }
     </style>
@@ -103,213 +117,143 @@
 <body>
 
 <header>
-    <h1>Guia de Verbos</h1>
-    <p>15 Verbos Essenciais em 3 Tempos</p>
+    <h1>Guia de Gramática</h1>
+    <p>Artigos, Preposições e Verbos</p>
 </header>
 
 <nav>
+    <a href="#artigos">Artikel</a>
+    <a href="#preposicoes">Präpositionen</a>
     <a href="#presente">Presente</a>
-    <a href="#passado">Pretérito</a>
+    <a href="#passado">Perfeito</a>
     <a href="#futuro">Futuro</a>
 </nav>
 
 <div class="container">
 
+    <section id="artigos">
+        <h2>Artigos (Die Artikel)</h2>
+        <div class="grid">
+            <div class="card">
+                <span class="tag gram-tag">Definidos (Bestimmt)</span>
+                <h3>O / A <small>(Der / Die / Das)</small></h3>
+                <table>
+                    <tr><th>Gênero</th><th>Singular</th><th>Plural</th></tr>
+                    <tr><td>Maskulin</td><td class="verb-form">O</td><td class="verb-form">Os</td></tr>
+                    <tr><td>Feminin</td><td class="verb-form">A</td><td class="verb-form">As</td></tr>
+                </table>
+                <div class="example-box">O sol brilha. (Die Sonne scheint.)</div>
+            </div>
+            <div class="card">
+                <span class="tag gram-tag">Indefinidos (Unbestimmt)</span>
+                <h3>Um / Uma <small>(Ein / Eine)</small></h3>
+                <table>
+                    <tr><th>Gênero</th><th>Singular</th><th>Plural</th></tr>
+                    <tr><td>Maskulin</td><td class="verb-form">Um</td><td class="verb-form">Uns</td></tr>
+                    <tr><td>Feminin</td><td class="verb-form">Uma</td><td class="verb-form">Umas</td></tr>
+                </table>
+                <div class="example-box">Eu vi um gato. (Ich sah eine Katze.)</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="preposicoes">
+        <h2>Preposições Essenciais (Präpositionen)</h2>
+        <div class="grid">
+            <div class="card">
+                <span class="tag gram-tag">Verschmelzungen</span>
+                <h3>De <small>(von/aus)</small></h3>
+                <table>
+                    <tr><td>de + o = <span class="verb-form">do</span></td><td>de + os = <span class="verb-form">dos</span></td></tr>
+                    <tr><td>de + a = <span class="verb-form">da</span></td><td>de + as = <span class="verb-form">das</span></td></tr>
+                </table>
+                <div class="example-box">O carro do João. (Joãos Auto / Das Auto von João.)</div>
+            </div>
+            <div class="card">
+                <span class="tag gram-tag">Verschmelzungen</span>
+                <h3>Em <small>(in/an/auf)</small></h3>
+                <table>
+                    <tr><td>em + o = <span class="verb-form">no</span></td><td>em + os = <span class="verb-form">nos</span></td></tr>
+                    <tr><td>em + a = <span class="verb-form">na</span></td><td>em + as = <span class="verb-form">nas</span></td></tr>
+                </table>
+                <div class="example-box">Estou na escola. (Ich bin in der Schule.)</div>
+            </div>
+            <div class="card">
+                <span class="tag gram-tag">Direktion</span>
+                <h3>A / Para <small>(nach/zu/für)</small></h3>
+                <p style="font-size: 0.8em;"><strong>A:</strong> Meist kurzfristig/Ziel.<br><strong>Para:</strong> Bestimmung/Dauerhaft.</p>
+                <div class="example-box">Vou para o Brasil. (Ich gehe nach Brasilien.)</div>
+            </div>
+        </div>
+    </section>
+
     <section id="presente">
         <h2>Presente do Indicativo (Gegenwart)</h2>
         <div class="grid">
-            <div class="card">
-                <span class="tag regular">Regulär (-ar)</span>
-                <h3>Falar <small>(Sprechen)</small></h3>
-                <table>
-                    <tr><td class="pronoun">Eu</td><td class="verb-form">falo</td></tr>
-                    <tr><td class="pronoun">Você/Ele</td><td class="verb-form">fala</td></tr>
-                    <tr><td class="pronoun">Nós</td><td class="verb-form">falamos</td></tr>
-                    <tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">falam</td></tr>
-                </table>
-            </div>
-            <div class="card">
-                <span class="tag regular">Regulär (-er)</span>
-                <h3>Comer <small>(Essen)</small></h3>
-                <table>
-                    <tr><td class="pronoun">Eu</td><td class="verb-form">como</td></tr>
-                    <tr><td class="pronoun">Você/Ele</td><td class="verb-form">come</td></tr>
-                    <tr><td class="pronoun">Nós</td><td class="verb-form">comemos</td></tr>
-                    <tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">comem</td></tr>
-                </table>
-            </div>
-            <div class="card">
-                <span class="tag regular">Regulär (-ir)</span>
-                <h3>Abrir <small>(Öffnen)</small></h3>
-                <table>
-                    <tr><td class="pronoun">Eu</td><td class="verb-form">abro</td></tr>
-                    <tr><td class="pronoun">Você/Ele</td><td class="verb-form">abre</td></tr>
-                    <tr><td class="pronoun">Nós</td><td class="verb-form">abrimos</td></tr>
-                    <tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">abrem</td></tr>
-                </table>
-            </div>
-            <div class="card">
-                <span class="tag irregular">Irregulär</span>
-                <h3>Ser <small>(Sein)</small></h3>
-                <table>
-                    <tr><td class="pronoun">Eu</td><td class="verb-form">sou</td></tr>
-                    <tr><td class="pronoun">Você/Ele</td><td class="verb-form">é</td></tr>
-                    <tr><td class="pronoun">Nós</td><td class="verb-form">somos</td></tr>
-                    <tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">são</td></tr>
-                </table>
-            </div>
-            <div class="card">
-                <span class="tag irregular">Irregulär</span>
-                <h3>Estar <small>(Sein - Temp.)</small></h3>
-                <table>
-                    <tr><td class="pronoun">Eu</td><td class="verb-form">estou</td></tr>
-                    <tr><td class="pronoun">Você/Ele</td><td class="verb-form">está</td></tr>
-                    <tr><td class="pronoun">Nós</td><td class="verb-form">estamos</td></tr>
-                    <tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">estão</td></tr>
-                </table>
-            </div>
-            <div class="card">
-                <span class="tag irregular">Irregulär</span>
-                <h3>Ir <small>(Gehen)</small></h3>
-                <table>
-                    <tr><td class="pronoun">Eu</td><td class="verb-form">vou</td></tr>
-                    <tr><td class="pronoun">Você/Ele</td><td class="verb-form">vai</td></tr>
-                    <tr><td class="pronoun">Nós</td><td class="verb-form">vamos</td></tr>
-                    <tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">vão</td></tr>
-                </table>
-            </div>
-            <div class="card">
-                <span class="tag irregular">Irregulär</span>
-                <h3>Ter <small>(Haben)</small></h3>
-                <table>
-                    <tr><td class="pronoun">Eu</td><td class="verb-form">tenho</td></tr>
-                    <tr><td class="pronoun">Você/Ele</td><td class="verb-form">tem</td></tr>
-                    <tr><td class="pronoun">Nós</td><td class="verb-form">temos</td></tr>
-                    <tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">têm</td></tr>
-                </table>
-            </div>
-            <div class="card">
-                <span class="tag irregular">Irregulär</span>
-                <h3>Fazer <small>(Machen)</small></h3>
-                <table>
-                    <tr><td class="pronoun">Eu</td><td class="verb-form">faço</td></tr>
-                    <tr><td class="pronoun">Você/Ele</td><td class="verb-form">faz</td></tr>
-                    <tr><td class="pronoun">Nós</td><td class="verb-form">fazemos</td></tr>
-                    <tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">fazem</td></tr>
-                </table>
-            </div>
-            <div class="card">
-                <span class="tag irregular">Irregulär</span>
-                <h3>Querer <small>(Wollen)</small></h3>
-                <table>
-                    <tr><td class="pronoun">Eu</td><td class="verb-form">quero</td></tr>
-                    <tr><td class="pronoun">Você/Ele</td><td class="verb-form">quer</td></tr>
-                    <tr><td class="pronoun">Nós</td><td class="verb-form">queremos</td></tr>
-                    <tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">querem</td></tr>
-                </table>
-            </div>
-            <div class="card">
-                <span class="tag irregular">Irregulär</span>
-                <h3>Poder <small>(Können/Dürfen)</small></h3>
-                <table>
-                    <tr><td class="pronoun">Eu</td><td class="verb-form">posso</td></tr>
-                    <tr><td class="pronoun">Você/Ele</td><td class="verb-form">pode</td></tr>
-                    <tr><td class="pronoun">Nós</td><td class="verb-form">podemos</td></tr>
-                    <tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">podem</td></tr>
-                </table>
-            </div>
-            <div class="card">
-                <span class="tag irregular">Irregulär</span>
-                <h3>Ver <small>(Sehen)</small></h3>
-                <table>
-                    <tr><td class="pronoun">Eu</td><td class="verb-form">vejo</td></tr>
-                    <tr><td class="pronoun">Você/Ele</td><td class="verb-form">vê</td></tr>
-                    <tr><td class="pronoun">Nós</td><td class="verb-form">vemos</td></tr>
-                    <tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">veem</td></tr>
-                </table>
-            </div>
-            <div class="card">
-                <span class="tag irregular">Irregulär</span>
-                <h3>Dar <small>(Geben)</small></h3>
-                <table>
-                    <tr><td class="pronoun">Eu</td><td class="verb-form">dou</td></tr>
-                    <tr><td class="pronoun">Você/Ele</td><td class="verb-form">dá</td></tr>
-                    <tr><td class="pronoun">Nós</td><td class="verb-form">damos</td></tr>
-                    <tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">dão</td></tr>
-                </table>
-            </div>
-            <div class="card">
-                <span class="tag irregular">Irregulär</span>
-                <h3>Saber <small>(Wissen)</small></h3>
-                <table>
-                    <tr><td class="pronoun">Eu</td><td class="verb-form">sei</td></tr>
-                    <tr><td class="pronoun">Você/Ele</td><td class="verb-form">sabe</td></tr>
-                    <tr><td class="pronoun">Nós</td><td class="verb-form">sabemos</td></tr>
-                    <tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">sabem</td></tr>
-                </table>
-            </div>
-            <div class="card">
-                <span class="tag irregular">Irregulär</span>
-                <h3>Dizer <small>(Sagen)</small></h3>
-                <table>
-                    <tr><td class="pronoun">Eu</td><td class="verb-form">digo</td></tr>
-                    <tr><td class="pronoun">Você/Ele</td><td class="verb-form">diz</td></tr>
-                    <tr><td class="pronoun">Nós</td><td class="verb-form">dizemos</td></tr>
-                    <tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">dizem</td></tr>
-                </table>
-            </div>
-            <div class="card">
-                <span class="tag regular">Regulär (-ar)</span>
-                <h3>Gostar <small>(Mögen)</small></h3>
-                <table>
-                    <tr><td class="pronoun">Eu</td><td class="verb-form">gosto</td></tr>
-                    <tr><td class="pronoun">Você/Ele</td><td class="verb-form">gosta</td></tr>
-                    <tr><td class="pronoun">Nós</td><td class="verb-form">gostamos</td></tr>
-                    <tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">gostam</td></tr>
-                </table>
-            </div>
+            <div class="card"><span class="tag regular">Regulär (-ar)</span><h3>Falar <small>(Sprechen)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">falo</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">fala</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">falamos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">falam</td></tr></table></div>
+            <div class="card"><span class="tag regular">Regulär (-er)</span><h3>Comer <small>(Essen)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">como</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">come</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">comemos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">comem</td></tr></table></div>
+            <div class="card"><span class="tag regular">Regulär (-ir)</span><h3>Abrir <small>(Öffnen)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">abro</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">abre</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">abrimos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">abrem</td></tr></table></div>
+            <div class="card"><span class="tag irregular">Irregulär</span><h3>Ser <small>(Sein)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">sou</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">é</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">somos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">são</td></tr></table></div>
+            <div class="card"><span class="tag irregular">Irregulär</span><h3>Estar <small>(Sein - Temp.)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">estou</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">está</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">estamos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">estão</td></tr></table></div>
+            <div class="card"><span class="tag irregular">Irregulär</span><h3>Ir <small>(Gehen)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">vou</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">vai</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">vamos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">vão</td></tr></table></div>
+            <div class="card"><span class="tag irregular">Irregulär</span><h3>Ter <small>(Haben)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">tenho</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">tem</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">temos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">têm</td></tr></table></div>
+            <div class="card"><span class="tag irregular">Irregulär</span><h3>Fazer <small>(Machen)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">faço</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">faz</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">fazemos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">fazem</td></tr></table></div>
+            <div class="card"><span class="tag irregular">Irregulär</span><h3>Querer <small>(Wollen)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">quero</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">quer</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">queremos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">querem</td></tr></table></div>
+            <div class="card"><span class="tag irregular">Irregulär</span><h3>Poder <small>(Können)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">posso</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">pode</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">podemos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">podem</td></tr></table></div>
+            <div class="card"><span class="tag irregular">Irregulär</span><h3>Ver <small>(Sehen)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">vejo</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">vê</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">vemos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">veem</td></tr></table></div>
+            <div class="card"><span class="tag irregular">Irregulär</span><h3>Dar <small>(Geben)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">dou</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">dá</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">damos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">dão</td></tr></table></div>
+            <div class="card"><span class="tag irregular">Irregulär</span><h3>Saber <small>(Wissen)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">sei</td></tr><tr><td class="pronoun">VocVB/Ele</td><td class="verb-form">sabe</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">sabemos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">sabem</td></tr></table></div>
+            <div class="card"><span class="tag irregular">Irregulär</span><h3>Dizer <small>(Sagen)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">digo</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">diz</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">dizemos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">dizem</td></tr></table></div>
+            <div class="card"><span class="tag regular">Regulär (-ar)</span><h3>Gostar <small>(Mögen)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">gosto</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">gosta</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">gostamos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">gostam</td></tr></table></div>
         </div>
     </section>
 
     <section id="passado">
         <h2>Pretérito Perfeito (Vergangenheit)</h2>
         <div class="grid">
-            <div class="card"><span class="tag regular">Regulär</span><h3>Falar</h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">falei</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">falou</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">falamos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">falaram</td></tr></table></div>
-            <div class="card"><span class="tag regular">Regulär</span><h3>Comer</h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">comi</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">comeu</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">comemos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">comeram</td></tr></table></div>
-            <div class="card"><span class="tag regular">Regulär</span><h3>Abrir</h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">abri</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">abriu</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">abrimos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">abriram</td></tr></table></div>
-            <div class="card"><span class="tag irregular">Irregulär</span><h3>Ser / Ir</h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">fui</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">foi</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">fomos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">foram</td></tr></table></div>
-            <div class="card"><span class="tag irregular">Irregulär</span><h3>Estar</h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">estive</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">esteve</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">estivemos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">estiveram</td></tr></table></div>
-            <div class="card"><span class="tag irregular">Irregulär</span><h3>Ter</h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">tive</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">teve</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">tivemos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">tiveram</td></tr></table></div>
-            <div class="card"><span class="tag irregular">Irregulär</span><h3>Fazer</h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">fiz</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">fez</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">fizemos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">fizeram</td></tr></table></div>
-            <div class="card"><span class="tag irregular">Irregulär</span><h3>Querer</h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">quis</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">quis</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">quisemos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">quiseram</td></tr></table></div>
-            <div class="card"><span class="tag irregular">Irregulär</span><h3>Poder</h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">pude</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">pôde</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">pudemos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">puderam</td></tr></table></div>
-            <div class="card"><span class="tag irregular">Irregulär</span><h3>Ver</h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">vi</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">viu</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">vimos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">viram</td></tr></table></div>
-            <div class="card"><span class="tag irregular">Irregulär</span><h3>Dar</h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">dei</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">deu</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">demos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">deram</td></tr></table></div>
-            <div class="card"><span class="tag irregular">Irregulär</span><h3>Saber</h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">soube</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">soube</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">soubemos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">souberam</td></tr></table></div>
-            <div class="card"><span class="tag irregular">Irregulär</span><h3>Dizer</h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">disse</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">disse</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">dissemos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">disseram</td></tr></table></div>
-            <div class="card"><span class="tag regular">Regulär</span><h3>Gostar</h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">gostei</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">gostou</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">gostamos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">gostaram</td></tr></table></div>
+            <div class="card"><span class="tag regular">Regulär (-ar)</span><h3>Falar <small>(Sprechen)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">falei</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">falou</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">falamos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">falaram</td></tr></table></div>
+            <div class="card"><span class="tag regular">Regulär (-er)</span><h3>Comer <small>(Essen)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">comi</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">comeu</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">comemos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">comeram</td></tr></table></div>
+            <div class="card"><span class="tag regular">Regulär (-ir)</span><h3>Abrir <small>(Öffnen)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">abri</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">abriu</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">abrimos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">abriram</td></tr></table></div>
+            <div class="card"><span class="tag irregular">Irregulär</span><h3>Ser / Ir <small>(Sein / Gehen)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">fui</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">foi</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">fomos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">foram</td></tr></table></div>
+            <div class="card"><span class="tag irregular">Irregulär</span><h3>Estar <small>(Sein - Temp.)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">estive</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">esteve</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">estivemos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">estiveram</td></tr></table></div>
+            <div class="card"><span class="tag irregular">Irregulär</span><h3>Ir <small>(Gehen - vgl. Ser)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">fui</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">foi</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">fomos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">foram</td></tr></table></div>
+            <div class="card"><span class="tag irregular">Irregulär</span><h3>Ter <small>(Haben)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">tive</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">teve</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">tivemos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">tiveram</td></tr></table></div>
+            <div class="card"><span class="tag irregular">Irregulär</span><h3>Fazer <small>(Machen)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">fiz</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">fez</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">fizemos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">fizeram</td></tr></table></div>
+            <div class="card"><span class="tag irregular">Irregulär</span><h3>Querer <small>(Wollen)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">quis</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">quis</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">quisemos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">quiseram</td></tr></table></div>
+            <div class="card"><span class="tag irregular">Irregulär</span><h3>Poder <small>(Können)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">pude</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">pôde</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">pudemos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">puderam</td></tr></table></div>
+            <div class="card"><span class="tag irregular">Irregulär</span><h3>Ver <small>(Sehen)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">vi</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">viu</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">vimos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">viram</td></tr></table></div>
+            <div class="card"><span class="tag irregular">Irregulär</span><h3>Dar <small>(Geben)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">dei</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">deu</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">demos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">deram</td></tr></table></div>
+            <div class="card"><span class="tag irregular">Irregulär</span><h3>Saber <small>(Wissen)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">soube</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">soube</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">soubemos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">souberam</td></tr></table></div>
+            <div class="card"><span class="tag irregular">Irregulär</span><h3>Dizer <small>(Sagen)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">disse</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">disse</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">dissemos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">disseram</td></tr></table></div>
+            <div class="card"><span class="tag regular">Regulär (-ar)</span><h3>Gostar <small>(Mögen)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">gostei</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">gostou</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">gostamos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">gostaram</td></tr></table></div>
         </div>
     </section>
 
     <section id="futuro">
         <h2>Futuro do Presente (Zukunft)</h2>
-        <p style="text-align: center; font-size: 0.8em; color: #888;">Hinweis: Die Zukunft ist im Portugiesischen sehr regelmäßig (Infinitiv + Endung).</p>
         <div class="grid">
-            <div class="card"><span class="tag regular">Regulär</span><h3>Falar</h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">falarei</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">falará</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">falaremos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">falarão</td></tr></table></div>
-            <div class="card"><span class="tag regular">Regulär</span><h3>Comer</h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">comerei</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">comerá</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">comeremos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">comerão</td></tr></table></div>
-            <div class="card"><span class="tag regular">Regulär</span><h3>Abrir</h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">abrirei</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">abrirá</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">abriremos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">abrirão</td></tr></table></div>
-            <div class="card"><span class="tag regular">Regulär</span><h3>Ser</h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">serei</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">será</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">seremos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">serão</td></tr></table></div>
-            <div class="card"><span class="tag regular">Regulär</span><h3>Ir</h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">irei</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">irá</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">iremos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">irão</td></tr></table></div>
-            <div class="card"><span class="tag irregular">Irregulär*</span><h3>Fazer</h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">farei</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">fará</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">faremos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">farão</td></tr></table></div>
-            <div class="card"><span class="tag irregular">Irregulär*</span><h3>Dizer</h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">direi</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">dirá</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">diremos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">dirão</td></tr></table></div>
-            <div class="card"><span class="tag regular">Regulär</span><h3>Ter</h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">terei</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">terá</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">teremos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">terão</td></tr></table></div>
+            <div class="card"><span class="tag regular">Regulär (-ar)</span><h3>Falar <small>(Sprechen)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">falarei</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">falará</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">falaremos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">falarão</td></tr></table></div>
+            <div class="card"><span class="tag regular">Regulär (-er)</span><h3>Comer <small>(Essen)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">comerei</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">comerá</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">comeremos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">comerão</td></tr></table></div>
+            <div class="card"><span class="tag regular">Regulär (-ir)</span><h3>Abrir <small>(Öffnen)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">abrirei</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">abrirá</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">abriremos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">abrirão</td></tr></table></div>
+            <div class="card"><span class="tag regular">Regulär</span><h3>Ser <small>(Sein)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">serei</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">será</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">seremos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">serão</td></tr></table></div>
+            <div class="card"><span class="tag regular">Regulär</span><h3>Estar <small>(Sein - Temp.)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">estarei</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">estará</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">estaremos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">estarão</td></tr></table></div>
+            <div class="card"><span class="tag regular">Regulär</span><h3>Ir <small>(Gehen)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">irei</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">irá</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">iremos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">irão</td></tr></table></div>
+            <div class="card"><span class="tag regular">Regulär</span><h3>Ter <small>(Haben)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">terei</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">terá</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">teremos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">terão</td></tr></table></div>
+            <div class="card"><span class="tag irregular">Irregulär*</span><h3>Fazer <small>(Machen)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">farei</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">fará</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">faremos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">farão</td></tr></table></div>
+            <div class="card"><span class="tag regular">Regulär</span><h3>Querer <small>(Wollen)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">quererei</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">quererá</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">quereremos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">quererão</td></tr></table></div>
+            <div class="card"><span class="tag regular">Regulär</span><h3>Poder <small>(Können)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">poderei</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">poderá</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">poderemos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">poderão</td></tr></table></div>
+            <div class="card"><span class="tag regular">Regulär</span><h3>Ver <small>(Sehen)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">verei</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">verá</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">veremos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">verão</td></tr></table></div>
+            <div class="card"><span class="tag regular">Regulär</span><h3>Dar <small>(Geben)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">darei</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">dará</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">daremos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">darão</td></tr></table></div>
+            <div class="card"><span class="tag regular">Regulär</span><h3>Saber <small>(Wissen)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">saberei</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">saberá</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">saberemos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">saberão</td></tr></table></div>
+            <div class="card"><span class="tag irregular">Irregulär*</span><h3>Dizer <small>(Sagen)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">direi</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">dirá</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">diremos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">dirão</td></tr></table></div>
+            <div class="card"><span class="tag regular">Regulär (-ar)</span><h3>Gostar <small>(Mögen)</small></h3><table><tr><td class="pronoun">Eu</td><td class="verb-form">gostarei</td></tr><tr><td class="pronoun">Você/Ele</td><td class="verb-form">gostará</td></tr><tr><td class="pronoun">Nós</td><td class="verb-form">gostaremos</td></tr><tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">gostarão</td></tr></table></div>
         </div>
     </section>
 
 </div>
 
 <footer>
-    <p>Guia de Estudo Português &copy; 2024</p>
+    <p>Obrigado por estudar conosco! &copy; 2026</p>
 </footer>
 
 </body>

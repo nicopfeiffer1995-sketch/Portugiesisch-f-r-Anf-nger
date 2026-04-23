@@ -63,18 +63,27 @@
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        /* Spezielle Anpassung für die Artikel-Sektion damit sie harmonisch wirkt */
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
             gap: 20px;
             margin-top: 20px;
         }
 
         .card {
             background: var(--card-bg);
-            padding: 15px;
+            padding: 20px;
             border-radius: 5px;
             border: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
         }
 
         .tag {
@@ -91,36 +100,42 @@
         .irregular { background: var(--accent-color); color: white; }
         .gram-tag { background: #4a0404; color: white; }
 
-        h3 { margin: 5px 0; font-size: 1.1em; color: var(--header-bg); }
+        h3 { margin: 5px 0 15px 0; font-size: 1.2em; color: var(--header-bg); border-bottom: 1px solid #eee; padding-bottom: 5px;}
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 10px;
             flex-grow: 1;
         }
 
-        td, th { padding: 4px 2px; border-bottom: 1px solid #f9f9f9; font-size: 0.8em; text-align: left; }
-        .pronoun { color: #888; font-style: italic; width: 35%; }
+        td, th { padding: 8px 4px; border-bottom: 1px solid #f2f2f2; font-size: 0.85em; text-align: left; }
+        th { color: #888; font-weight: normal; text-transform: uppercase; font-size: 0.7em; }
+        .pronoun { color: #888; font-style: italic; width: 20%; }
         .verb-form { font-weight: bold; color: var(--accent-color); }
+        .adj-ending { color: #d63031; text-decoration: underline; } /* Markiert die Endung */
 
         .example-box {
             background: #fcf8ec;
-            padding: 8px;
+            padding: 10px;
             border-left: 3px solid var(--accent-color);
-            margin-top: 12px;
-            font-size: 0.75em;
+            margin-top: 15px;
+            font-size: 0.8em;
             color: #555;
+            font-style: italic;
         }
 
         footer { text-align: center; padding: 40px; color: #999; font-size: 0.8em; }
+
+        @media (max-width: 600px) {
+            .article-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
 
 <header>
     <h1>Deutsche Grammatik</h1>
-    <p>Vollständige Konjugation, Artikel & Kasus</p>
+    <p>Artikel, Adjektivdeklination & 15 Verben</p>
 </header>
 
 <nav>
@@ -134,61 +149,70 @@
 <div class="container">
 
     <section id="artigos">
-        <h2>Artikel & Deklination (Die 4 Fälle)</h2>
-        <div class="grid">
-            <div class="card">
-                <span class="tag gram-tag">Grundlagen</span>
-                <h3>Der, Die, Das / Ein, Eine</h3>
-                <table>
-                    <tr><th>Genus</th><th>Bestimmt</th><th>Unbestimmt</th></tr>
-                    <tr><td>Mask.</td><td>Der</td><td>Ein</td></tr>
-                    <tr><td>Fem.</td><td>Die</td><td>Eine</td></tr>
-                    <tr><td>Neut.</td><td>Das</td><td>Ein</td></tr>
-                    <tr><td>Plur.</td><td>Die</td><td>-</td></tr>
-                </table>
-            </div>
-            <div class="card">
-                <span class="tag gram-tag">Demonstrativ</span>
-                <h3>Dieser, Diese, Dieses</h3>
-                <p style="font-size: 0.75em;">Bezieht sich auf etwas Konkretes/Nahes.</p>
-                <table>
-                    <tr><td>Mask.</td><td class="verb-form">Dieser</td><td>Hund</td></tr>
-                    <tr><td>Fem.</td><td class="verb-form">Diese</td><td>Frau</td></tr>
-                    <tr><td>Neut.</td><td class="verb-form">Dieses</td><td>Kind</td></tr>
-                </table>
-            </div>
+        <h2>Artikel & Adjektivdeklination</h2>
+        <div class="article-grid">
             
             <div class="card">
-                <span class="tag gram-tag">Kasus (Fälle)</span>
-                <h3>Bestimmte Artikel</h3>
+                <span class="tag gram-tag">Schwache Deklination</span>
+                <h3>Bestimmter Artikel + Adjektiv</h3>
                 <table>
-                    <tr><th>Fall</th><th>Mask.</th><th>Fem.</th><th>Neut.</th></tr>
-                    <tr><td><strong>Nom.</strong></td><td class="verb-form">der</td><td>die</td><td>das</td></tr>
-                    <tr><td><strong>Gen.</strong></td><td class="verb-form">des</td><td>der</td><td>des</td></tr>
-                    <tr><td><strong>Dat.</strong></td><td class="verb-form">dem</td><td>der</td><td>dem</td></tr>
-                    <tr><td><strong>Akk.</strong></td><td class="verb-form">den</td><td>die</td><td>das</td></tr>
+                    <tr><th>Fall</th><th>Maskulin (Hund)</th><th>Feminin (Frau)</th><th>Neutral (Kind)</th></tr>
+                    <tr><td><strong>Nom.</strong></td><td>der alt<span class="adj-ending">e</span></td><td>die jung<span class="adj-ending">e</span></td><td>das klein<span class="adj-ending">e</span></td></tr>
+                    <tr><td><strong>Gen.</strong></td><td>des alt<span class="adj-ending">en</span></td><td>der jung<span class="adj-ending">en</span></td><td>des klein<span class="adj-ending">en</span></td></tr>
+                    <tr><td><strong>Dat.</strong></td><td>dem alt<span class="adj-ending">en</span></td><td>der jung<span class="adj-ending">en</span></td><td>dem klein<span class="adj-ending">en</span></td></tr>
+                    <tr><td><strong>Akk.</strong></td><td>den alt<span class="adj-ending">en</span></td><td>die jung<span class="adj-ending">e</span></td><td>das klein<span class="adj-ending">e</span></td></tr>
                 </table>
                 <div class="example-box">
-                    <strong>Bsp (Dat):</strong> Ich helfe <strong>dem</strong> Mann.<br>
-                    <strong>Bsp (Gen):</strong> Das Auto <strong>des</strong> Vaters.
+                    "Ich sehe <strong>den alten</strong> Hund." (Akkusativ Maskulin)
                 </div>
             </div>
 
             <div class="card">
-                <span class="tag gram-tag">Kasus (Fälle)</span>
-                <h3>Unbestimmte Artikel</h3>
+                <span class="tag gram-tag">Gemischte Deklination</span>
+                <h3>Unbestimmter Artikel + Adjektiv</h3>
                 <table>
-                    <tr><th>Fall</th><th>Mask.</th><th>Fem.</th><th>Neut.</th></tr>
-                    <tr><td><strong>Nom.</strong></td><td class="verb-form">ein</td><td>eine</td><td>ein</td></tr>
-                    <tr><td><strong>Gen.</strong></td><td class="verb-form">eines</td><td>einer</td><td>eines</td></tr>
-                    <tr><td><strong>Dat.</strong></td><td class="verb-form">einem</td><td>einer</td><td>einem</td></tr>
-                    <tr><td><strong>Akk.</strong></td><td class="verb-form">einen</td><td>eine</td><td>ein</td></tr>
+                    <tr><th>Fall</th><th>Maskulin (Tisch)</th><th>Feminin (Tasche)</th><th>Neutral (Buch)</th></tr>
+                    <tr><td><strong>Nom.</strong></td><td>ein neu<span class="adj-ending">er</span></td><td>eine groß<span class="adj-ending">e</span></td><td>ein schö<span class="adj-ending">nes</span></td></tr>
+                    <tr><td><strong>Gen.</strong></td><td>eines neu<span class="adj-ending">en</span></td><td>einer groß<span class="adj-ending">en</span></td><td>eines schö<span class="adj-ending">nen</span></td></tr>
+                    <tr><td><strong>Dat.</strong></td><td>einem neu<span class="adj-ending">en</span></td><td>einer groß<span class="adj-ending">en</span></td><td>einem schö<span class="adj-ending">nen</span></td></tr>
+                    <tr><td><strong>Akk.</strong></td><td>einen neu<span class="adj-ending">en</span></td><td>eine groß<span class="adj-ending">e</span></td><td>ein schö<span class="adj-ending">nes</span></td></tr>
                 </table>
                 <div class="example-box">
-                    <strong>Bsp (Akk):</strong> Ich suche <strong>einen</strong> Job.<br>
-                    <strong>Bsp (Dat):</strong> Ich schreibe <strong>einem</strong> Kind.
+                    "Das ist das Cover <strong>eines schönen</strong> Buches." (Genitiv Neutral)
                 </div>
             </div>
+
+            <div class="card">
+                <span class="tag gram-tag">Hinweisend</span>
+                <h3>Dieser, Diese, Dieses</h3>
+                <p style="font-size: 0.8em; margin-bottom: 10px;">Folgt der Deklination des bestimmten Artikels.</p>
+                <table>
+                    <tr><th>Fall</th><th>Maskulin</th><th>Feminin</th><th>Neutral</th></tr>
+                    <tr><td><strong>Nom.</strong></td><td class="verb-form">dieser</td><td>diese</td><td>dieses</td></tr>
+                    <tr><td><strong>Dat.</strong></td><td class="verb-form">diesem</td><td>dieser</td><td>diesem</td></tr>
+                    <tr><td><strong>Akk.</strong></td><td class="verb-form">diesen</td><td>diese</td><td>dieses</td></tr>
+                </table>
+                <div class="example-box">
+                    "Ich traue <strong>diesem</strong> alten Braten nicht."
+                </div>
+            </div>
+
+            <div class="card">
+                <span class="tag gram-tag">Plural</span>
+                <h3>Pluralformen (Bestimmt)</h3>
+                <p style="font-size: 0.8em; margin-bottom: 10px;">Alle Genera haben im Plural dieselben Artikel.</p>
+                <table>
+                    <tr><th>Fall</th><th>Artikel + Adjektiv</th><th>Beispiel</th></tr>
+                    <tr><td><strong>Nom.</strong></td><td>die gut<span class="adj-ending">en</span></td><td>die guten Leute</td></tr>
+                    <tr><td><strong>Gen.</strong></td><td>der gut<span class="adj-ending">en</span></td><td>der guten Leute</td></tr>
+                    <tr><td><strong>Dat.</strong></td><td>den gut<span class="adj-ending">en</span></td><td>den guten Leute<strong>n</strong></td></tr>
+                    <tr><td><strong>Akk.</strong></td><td>die gut<span class="adj-ending">en</span></td><td>die guten Leute</td></tr>
+                </table>
+                <div class="example-box">
+                    Achtung: Im Dativ Plural erhält das Substantiv meist ein extra "n"!
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -196,8 +220,8 @@
         <h2>Präpositionen & Verschmelzungen</h2>
         <div class="grid">
             <div class="card">
-                <h3>Lokale & Temporale</h3>
-                <p style="font-size: 0.75em;">Wichtige kurze Verbindungen:</p>
+                <h3>Lokale & Temporale Verschmelzungen</h3>
+                <p style="font-size: 0.75em;">Wichtige kurze Verbindungen aus Präposition + Artikel:</p>
                 <table>
                     <tr><td>An + dem</td><td class="verb-form">am</td><td>In + dem</td><td class="verb-form">im</td></tr>
                     <tr><td>Zu + dem</td><td class="verb-form">zum</td><td>Zu + der</td><td class="verb-form">zur</td></tr>
@@ -221,7 +245,7 @@
             <div class="card"><span class="tag regular">Regelmäßig</span><h3>Machen</h3><table><tr><td class="pronoun">Ich</td><td class="verb-form">mache</td><td class="pronoun">Wir</td><td class="verb-form">machen</td></tr><tr><td class="pronoun">Du</td><td class="verb-form">machst</td><td class="pronoun">Ihr</td><td class="verb-form">macht</td></tr><tr><td class="pronoun">Er/Sie/Es</td><td class="verb-form">macht</td><td class="pronoun">Sie/sie</td><td class="verb-form">machen</td></tr></table><div class="example-box">Was macht ihr am Wochenende?</div></div>
             <div class="card"><span class="tag irregular">Modalverb</span><h3>Wollen</h3><table><tr><td class="pronoun">Ich</td><td class="verb-form">will</td><td class="pronoun">Wir</td><td class="verb-form">wollen</td></tr><tr><td class="pronoun">Du</td><td class="verb-form">willst</td><td class="pronoun">Ihr</td><td class="verb-form">wollt</td></tr><tr><td class="pronoun">Er/Sie/Es</td><td class="verb-form">will</td><td class="pronoun">Sie/sie</td><td class="verb-form">wollen</td></tr></table><div class="example-box">Ich will Deutsch lernen.</div></div>
             <div class="card"><span class="tag irregular">Modalverb</span><h3>Können</h3><table><tr><td class="pronoun">Ich</td><td class="verb-form">kann</td><td class="pronoun">Wir</td><td class="verb-form">können</td></tr><tr><td class="pronoun">Du</td><td class="verb-form">kannst</td><td class="pronoun">Ihr</td><td class="verb-form">könnt</td></tr><tr><td class="pronoun">Er/Sie/Es</td><td class="verb-form">kann</td><td class="pronoun">Sie/sie</td><td class="verb-form">können</td></tr></table><div class="example-box">Sie können sehr gut kochen.</div></div>
-            <div class="card"><span class="tag regular">Regelmäßig</span><h3>Sehen</h3><table><tr><td class="pronoun">Ich</td><td class="verb-form">sehe</td><td class="pronoun">Wir</td><td class="verb-form">sehen</td></tr><tr><td class="pronoun">Du</td><td class="verb-form">siehst</td><td class="pronoun">Ihr</td><td class="verb-form">seht</td></tr><tr><td class="pronoun">Er/Sie/Es</td><td class="verb-form">sieht</td><td class="pronoun">Sie/sie</td><td class="verb-form">sehen</td></tr></table><div class="example-box">Er sieht den film im Kino.</div></div>
+            <div class="card"><span class="tag regular">Regelmäßig</span><h3>Sehen</h3><table><tr><td class="pronoun">Ich</td><td class="verb-form">sehe</td><td class="pronoun">Wir</td><td class="verb-form">sehen</td></tr><tr><td class="pronoun">Du</td><td class="verb-form">siehst</td><td class="pronoun">Ihr</td><td class="verb-form">seht</td></tr><tr><td class="pronoun">Er/Sie/Es</td><td class="verb-form">sieht</td><td class="pronoun">Sie/sie</td><td class="verb-form">sehen</td></tr></table><div class="example-box">Er sieht den Film im Kino.</div></div>
             <div class="card"><span class="tag regular">Regelmäßig</span><h3>Geben</h3><table><tr><td class="pronoun">Ich</td><td class="verb-form">gebe</td><td class="pronoun">Wir</td><td class="verb-form">geben</td></tr><tr><td class="pronoun">Du</td><td class="verb-form">gibst</td><td class="pronoun">Ihr</td><td class="verb-form">gebt</td></tr><tr><td class="pronoun">Er/Sie/Es</td><td class="verb-form">gibt</td><td class="pronoun">Sie/sie</td><td class="verb-form">geben</td></tr></table><div class="example-box">Ich gebe dir das Buch zurück.</div></div>
             <div class="card"><span class="tag irregular">Irregulär</span><h3>Wissen</h3><table><tr><td class="pronoun">Ich</td><td class="verb-form">weiß</td><td class="pronoun">Wir</td><td class="verb-form">wissen</td></tr><tr><td class="pronoun">Du</td><td class="verb-form">weißt</td><td class="pronoun">Ihr</td><td class="verb-form">wisst</td></tr><tr><td class="pronoun">Er/Sie/Es</td><td class="verb-form">weiß</td><td class="pronoun">Sie/sie</td><td class="verb-form">wissen</td></tr></table><div class="example-box">Wir wissen die Antwort nicht.</div></div>
             <div class="card"><span class="tag regular">Regelmäßig</span><h3>Sagen</h3><table><tr><td class="pronoun">Ich</td><td class="verb-form">sage</td><td class="pronoun">Wir</td><td class="verb-form">sagen</td></tr><tr><td class="pronoun">Du</td><td class="verb-form">sagst</td><td class="pronoun">Ihr</td><td class="verb-form">sagt</td></tr><tr><td class="pronoun">Er/Sie/Es</td><td class="verb-form">sagt</td><td class="pronoun">Sie/sie</td><td class="verb-form">sagen</td></tr></table><div class="example-box">Was sagst du dazu?</div></div>

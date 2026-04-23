@@ -3,190 +3,274 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gramática Portuguesa</title>
+    <title>Gramática Brasileira | Guia Estético</title>
     <style>
         :root {
-            --bg-color: #fdfaf1; /* Creme/Beige */
-            --header-bg: #4a0404; /* Weinrot */
-            --accent-color: #800020; /* Burgund/Purpur */
+            --bg-color: #fcf9f2; /* Helles Creme */
+            --header-bg: #4a0404; /* Tiefes Weinrot */
+            --accent-main: #800020; /* Burgund */
+            --accent-soft: #e0d7c6; /* Beige-Grau für Linien */
             --text-color: #2c2c2c;
             --card-bg: #ffffff;
-            --border-color: #e0d7c6;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Garamond', 'Georgia', serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
-            padding: 20px;
-            line-height: 1.6;
+            padding: 0;
+            line-height: 1.5;
         }
 
         header {
+            background-color: var(--header-bg);
+            color: white;
+            padding: 60px 20px;
             text-align: center;
-            padding: 40px 0;
-            color: var(--header-bg);
-            border-bottom: 2px solid var(--header-bg);
-            margin-bottom: 40px;
+            border-bottom: 5px solid var(--accent-main);
         }
 
-        h1 { font-weight: 300; letter-spacing: 2px; text-transform: uppercase; }
-        h2 { color: var(--accent-color); border-left: 5px solid var(--accent-color); padding-left: 10px; }
+        header h1 { 
+            margin: 0; 
+            font-size: 2.5em; 
+            letter-spacing: 3px; 
+            text-transform: uppercase;
+        }
 
-        .container { max-width: 1000px; margin: 0 auto; }
+        nav {
+            background: white;
+            padding: 15px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
 
-        .section { margin-bottom: 50px; }
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: var(--accent-main);
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.9em;
+        }
+
+        .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+
+        h2 { 
+            color: var(--accent-main); 
+            border-bottom: 1px solid var(--accent-soft);
+            padding-bottom: 10px;
+            margin-top: 50px;
+        }
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
         }
 
         .card {
             background: var(--card-bg);
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border: 1px solid var(--border-color);
+            padding: 25px;
+            border-radius: 4px;
+            border: 1px solid var(--accent-soft);
+            transition: transform 0.2s;
         }
+
+        .card:hover { transform: translateY(-5px); }
+
+        .tag {
+            background: var(--accent-main);
+            color: white;
+            padding: 3px 10px;
+            font-size: 0.7em;
+            text-transform: uppercase;
+            border-radius: 2px;
+        }
+
+        h3 { margin-top: 15px; border-left: 3px solid var(--accent-main); padding-left: 10px; }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
-        th, td {
-            text-align: left;
+        td { padding: 8px 0; border-bottom: 0.5px solid #eee; }
+        .pronoun { color: #888; font-style: italic; font-size: 0.9em; width: 50%; }
+        .verb-form { font-weight: bold; color: var(--text-color); }
+
+        .example {
+            font-size: 0.9em;
+            background: #fdfaf1;
             padding: 10px;
-            border-bottom: 1px solid var(--border-color);
+            border-left: 2px solid var(--accent-soft);
+            margin-top: 10px;
+            display: block;
         }
 
-        th { color: var(--accent-color); font-weight: 600; }
-
-        .pronoun { font-style: italic; color: #777; width: 40%; }
-
-        .tag {
-            display: inline-block;
-            background: var(--accent-color);
-            color: white;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.8em;
-            margin-bottom: 10px;
-        }
-
-        footer { text-align: center; margin-top: 50px; font-size: 0.9em; color: #888; }
+        footer { text-align: center; padding: 40px; color: #888; border-top: 1px solid var(--accent-soft); }
     </style>
 </head>
 <body>
 
+<header>
+    <h1>Gramática Brasileira</h1>
+    <p>O Guia Essencial de Conjugação</p>
+</header>
+
+<nav>
+    <a href="#artigos">Artikel</a>
+    <a href="#presente">Presente</a>
+    <a href="#passado">Pretérito</a>
+    <a href="#futuro">Futuro</a>
+</nav>
+
 <div class="container">
-    <header>
-        <h1>Gramática Brasileira</h1>
-        <p>Konjugationen & Deklinationen im Portugiesischen</p>
-    </header>
 
-    <section class="section">
-        <h2>Verben (Presente do Indicativo)</h2>
+    <section id="artigos">
+        <h2>Artigos (Artikel)</h2>
         <div class="grid">
-            
             <div class="card">
-                <span class="tag">Regulär (-ar)</span>
-                <h3>Falar <small>(Sprechen)</small></h3>
+                <span class="tag">Definidos (Bestimmt)</span>
+                <h3>Maskulin / Feminin</h3>
                 <table>
-                    <tr><td class="pronoun">Eu</td><td>falo</td></tr>
-                    <tr><td class="pronoun">Você/Ele/Ela</td><td>fala</td></tr>
-                    <tr><td class="pronoun">Nós</td><td>falamos</td></tr>
-                    <tr><td class="pronoun">Vocês/Eles</td><td>falam</td></tr>
+                    <tr><td class="pronoun">Singular (m)</td><td class="verb-form">O</td></tr>
+                    <tr><td class="pronoun">Singular (f)</td><td class="verb-form">A</td></tr>
+                    <tr><td class="pronoun">Plural (m)</td><td class="verb-form">Os</td></tr>
+                    <tr><td class="pronoun">Plural (f)</td><td class="verb-form">As</td></tr>
+                </table>
+                <span class="example"><strong>Exemplo:</strong> O livro é bom. (Das Buch ist gut.)</span>
+            </div>
+            <div class="card">
+                <span class="tag">Indefinidos (Unbestimmt)</span>
+                <h3>Maskulin / Feminin</h3>
+                <table>
+                    <tr><td class="pronoun">Singular (m)</td><td class="verb-form">Um</td></tr>
+                    <tr><td class="pronoun">Singular (f)</td><td class="verb-form">Uma</td></tr>
+                    <tr><td class="pronoun">Plural (m)</td><td class="verb-form">Uns</td></tr>
+                    <tr><td class="pronoun">Plural (f)</td><td class="verb-form">Umas</td></tr>
+                </table>
+                <span class="example"><strong>Exemplo:</strong> Eu vi uma casa. (Ich habe ein Haus gesehen.)</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="presente">
+        <h2>Presente do Indicativo (Gegenwart)</h2>
+        <p>Für Fakten und Gewohnheiten.</p>
+        <div class="grid">
+            <div class="card">
+                <h3>Falar <small>(ar)</small></h3>
+                <table>
+                    <tr><td class="pronoun">Eu</td><td class="verb-form">falo</td></tr>
+                    <tr><td class="pronoun">Você/Ele</td><td class="verb-form">fala</td></tr>
+                    <tr><td class="pronoun">Nós</td><td class="verb-form">falamos</td></tr>
+                    <tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">falam</td></tr>
                 </table>
             </div>
-
-            <div class="card">
-                <span class="tag" style="background: #a32a2a;">Irregulär</span>
-                <h3>Ser <small>(Sein - permanent)</small></h3>
+            <div class="card" style="border-color: var(--accent-main);">
+                <span class="tag">Irregular</span>
+                <h3>Ser</h3>
                 <table>
-                    <tr><td class="pronoun">Eu</td><td>sou</td></tr>
-                    <tr><td class="pronoun">Você/Ele/Ela</td><td>é</td></tr>
-                    <tr><td class="pronoun">Nós</td><td>somos</td></tr>
-                    <tr><td class="pronoun">Vocês/Eles</td><td>são</td></tr>
+                    <tr><td class="pronoun">Eu</td><td class="verb-form">sou</td></tr>
+                    <tr><td class="pronoun">Você/Ele</td><td class="verb-form">é</td></tr>
+                    <tr><td class="pronoun">Nós</td><td class="verb-form">somos</td></tr>
+                    <tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">são</td></tr>
                 </table>
             </div>
-
-            <div class="card">
-                <span class="tag" style="background: #a32a2a;">Irregulär</span>
-                <h3>Estar <small>(Sein - temporär)</small></h3>
+            <div class="card" style="border-color: var(--accent-main);">
+                <span class="tag">Irregular</span>
+                <h3>Ter</h3>
                 <table>
-                    <tr><td class="pronoun">Eu</td><td>estou</td></tr>
-                    <tr><td class="pronoun">Você/Ele/Ela</td><td>está</td></tr>
-                    <tr><td class="pronoun">Nós</td><td>estamos</td></tr>
-                    <tr><td class="pronoun">Vocês/Eles</td><td>estão</td></tr>
-                </table>
-            </div>
-
-            <div class="card">
-                <span class="tag" style="background: #a32a2a;">Irregulär</span>
-                <h3>Ter <small>(Haben)</small></h3>
-                <table>
-                    <tr><td class="pronoun">Eu</td><td>tenho</td></tr>
-                    <tr><td class="pronoun">Você/Ele/Ela</td><td>tem</td></tr>
-                    <tr><td class="pronoun">Nós</td><td>temos</td></tr>
-                    <tr><td class="pronoun">Vocês/Eles</td><td>têm</td></tr>
-                </table>
-            </div>
-
-            <div class="card">
-                <span class="tag">Regulär (-er)</span>
-                <h3>Comer <small>(Essen)</small></h3>
-                <table>
-                    <tr><td class="pronoun">Eu</td><td>como</td></tr>
-                    <tr><td class="pronoun">Você/Ele/Ela</td><td>come</td></tr>
-                    <tr><td class="pronoun">Nós</td><td>comemos</td></tr>
-                    <tr><td class="pronoun">Vocês/Eles</td><td>comem</td></tr>
-                </table>
-            </div>
-
-            <div class="card">
-                <span class="tag">Regulär (-ir)</span>
-                <h3>Abrir <small>(Öffnen)</small></h3>
-                <table>
-                    <tr><td class="pronoun">Eu</td><td>abro</td></tr>
-                    <tr><td class="pronoun">Você/Ele/Ela</td><td>abre</td></tr>
-                    <tr><td class="pronoun">Nós</td><td>abrimos</td></tr>
-                    <tr><td class="pronoun">Vocês/Eles</td><td>abrem</td></tr>
+                    <tr><td class="pronoun">Eu</td><td class="verb-form">tenho</td></tr>
+                    <tr><td class="pronoun">Você/Ele</td><td class="verb-form">tem</td></tr>
+                    <tr><td class="pronoun">Nós</td><td class="verb-form">temos</td></tr>
+                    <tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">têm</td></tr>
                 </table>
             </div>
         </div>
     </section>
 
-    <section class="section">
-        <h2>Artikel & Deklination</h2>
+    <section id="passado">
+        <h2>Pretérito Perfeito (Abgeschlossene Vergangenheit)</h2>
+        <p>Für Handlungen, die bereits beendet sind.</p>
         <div class="grid">
             <div class="card">
-                <h3>Bestimmte Artikel</h3>
+                <h3>Falar</h3>
                 <table>
-                    <tr><th>Genus</th><th>Singular</th><th>Plural</th></tr>
-                    <tr><td>Maskulin</td><td>o</td><td>os</td></tr>
-                    <tr><td>Feminin</td><td>a</td><td>as</td></tr>
+                    <tr><td class="pronoun">Eu</td><td class="verb-form">falei</td></tr>
+                    <tr><td class="pronoun">Você/Ele</td><td class="verb-form">falou</td></tr>
+                    <tr><td class="pronoun">Nós</td><td class="verb-form">falamos</td></tr>
+                    <tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">falaram</td></tr>
                 </table>
             </div>
-            <div class="card">
-                <h3>Unbestimmte Artikel</h3>
+            <div class="card" style="border-color: var(--accent-main);">
+                <span class="tag">Irregular</span>
+                <h3>Ser / Ir</h3>
                 <table>
-                    <tr><th>Genus</th><th>Singular</th><th>Plural</th></tr>
-                    <tr><td>Maskulin</td><td>um</td><td>uns</td></tr>
-                    <tr><td>Feminin</td><td>uma</td><td>umas</td></tr>
+                    <tr><td class="pronoun">Eu</td><td class="verb-form">fui</td></tr>
+                    <tr><td class="pronoun">Você/Ele</td><td class="verb-form">foi</td></tr>
+                    <tr><td class="pronoun">Nós</td><td class="verb-form">fomos</td></tr>
+                    <tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">foram</td></tr>
+                </table>
+            </div>
+            <div class="card" style="border-color: var(--accent-main);">
+                <span class="tag">Irregular</span>
+                <h3>Ter</h3>
+                <table>
+                    <tr><td class="pronoun">Eu</td><td class="verb-form">tive</td></tr>
+                    <tr><td class="pronoun">Você/Ele</td><td class="verb-form">teve</td></tr>
+                    <tr><td class="pronoun">Nós</td><td class="verb-form">tivemos</td></tr>
+                    <tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">tiveram</td></tr>
                 </table>
             </div>
         </div>
     </section>
 
-    <footer>
-        <p>&copy; 2024 Português Guia Estético</p>
-    </footer>
+    <section id="futuro">
+        <h2>Futuro do Presente (Zukunft)</h2>
+        <p>Für Pläne und Vorhersagen.</p>
+        <div class="grid">
+            <div class="card">
+                <h3>Falar</h3>
+                <table>
+                    <tr><td class="pronoun">Eu</td><td class="verb-form">falarei</td></tr>
+                    <tr><td class="pronoun">Você/Ele</td><td class="verb-form">falará</td></tr>
+                    <tr><td class="pronoun">Nós</td><td class="verb-form">falaremos</td></tr>
+                    <tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">falarão</td></tr>
+                </table>
+            </div>
+            <div class="card">
+                <h3>Ser</h3>
+                <table>
+                    <tr><td class="pronoun">Eu</td><td class="verb-form">serei</td></tr>
+                    <tr><td class="pronoun">Você/Ele</td><td class="verb-form">será</td></tr>
+                    <tr><td class="pronoun">Nós</td><td class="verb-form">seremos</td></tr>
+                    <tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">serão</td></tr>
+                </table>
+            </div>
+            <div class="card">
+                <h3>Ter</h3>
+                <table>
+                    <tr><td class="pronoun">Eu</td><td class="verb-form">terei</td></tr>
+                    <tr><td class="pronoun">Você/Ele</td><td class="verb-form">terá</td></tr>
+                    <tr><td class="pronoun">Nós</td><td class="verb-form">teremos</td></tr>
+                    <tr><td class="pronoun">Vocês/Eles</td><td class="verb-form">terão</td></tr>
+                </table>
+            </div>
+        </div>
+    </section>
+
 </div>
+
+<footer>
+    <p>Aprender Português é uma arte. &copy; 2024</p>
+</footer>
 
 </body>
 </html>
